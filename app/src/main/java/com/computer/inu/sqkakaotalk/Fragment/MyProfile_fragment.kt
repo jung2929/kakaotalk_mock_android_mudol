@@ -11,6 +11,8 @@ import com.computer.inu.sqkakaotalk.LoginActivity
 import com.computer.inu.sqkakaotalk.PayActivity
 import com.computer.inu.sqkakaotalk.R
 import com.computer.inu.sqkakaotalk.SharedPreferenceController
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.LogoutResponseCallback
 import kotlinx.android.synthetic.main.activity_my_profile_fragment.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
@@ -24,6 +26,7 @@ class MyProfile_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){
             val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
@@ -46,6 +49,6 @@ class MyProfile_fragment : Fragment() {
         tv_myprofile_pay.setOnClickListener {
             startActivity<PayActivity>()
         }
-    }
 
+    }
 }
