@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MapActivity">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="700dp">
+    <ImageView
+        android:id="@+id/iv_map_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/map"/>
+    <ImageView
+        android:id="@+id/iv_map_mapplus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/mapplus"/>
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="390dp"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/menu"/>
+        <EditText
+            android:paddingLeft="16dp"
+            android:background="#ffffff"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:textSize="13dp"
+            android:text="장소,버스,지하철,주소 검색"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/mic"
+            android:scaleType="centerCrop"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_map_mapbutton"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="right"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/nomap"/>
+</FrameLayout>
+
+</LinearLayout>

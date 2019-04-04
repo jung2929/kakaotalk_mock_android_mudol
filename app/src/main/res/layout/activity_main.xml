@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+<FrameLayout
+    android:id="@+id/fl_main_act_fragment_block"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/linearlayout_main_bottombar">
+</FrameLayout>
+ <LinearLayout
+     android:id="@+id/linearlayout_main_bottombar"
+     android:layout_alignParentBottom="true"
+     android:orientation="horizontal"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+     <ImageView
+         android:id="@+id/iv_main_human"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/selecetor_bottom_friendlist"/>
+     <ImageView
+         android:id="@+id/iv_main_message"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/selecetor_bottom_message"/>
+     <ImageView
+         android:id="@+id/iv_main_shap"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/selecetor_bottom_sharp"/>
+     <ImageView
+         android:id="@+id/iv_main_star"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/selecetor_bottom_star"/>
+     <ImageView
+         android:id="@+id/iv_main_more"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/selecetor_bottom_more"/>
+ </LinearLayout>
+</RelativeLayout>

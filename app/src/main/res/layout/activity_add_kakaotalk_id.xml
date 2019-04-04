@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8F8F6"
+    tools:context=".AddKakaotalkIdActivity">
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:id="@+id/iv_kakaotalk_finishaddfriend"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backbutton"/>
+        <TextView
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="20dp"
+            android:text="카카오톡 ID로 추가"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0C353232"
+        android:layout_alignParentBottom="true"/>
+<TextView
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="40dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="친구 카카오톡ID"
+    android:textSize="18dp"/>
+
+    <EditText
+        android:id="@+id/et_addkakaotalk_id"
+        android:background="#ffffff"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="8dp">
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:id="@+id/ll_add_myid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="플러스친구는 상단 검색 버튼으로 찾아주세요."/>
+   <LinearLayout
+       android:layout_marginTop="16dp"
+       android:layout_gravity="center"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내아이디"/>
+       <TextView
+           android:layout_marginLeft="8dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="kmh0833"/>
+   </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_add_cantfind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+        <TextView
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="사용자를 찾을 수 없습니다."/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카카오톡 ID를 다시 확인해주세요."/>
+        <TextView
+
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="플러스친구는 상단 검색 버튼으로 찾아주세요."/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_add_myfriend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_add_friend_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wood"
+            app:civ_border_color="#0C353232"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/iv_add_friend_pic"
+            android:id="@+id/tv_add_frinedname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="14음정환"/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/tv_add_frinedname"
+            android:id="@+id/tv_add_frinedstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="새로운 친구입니다."/>
+        <Button
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/tv_add_frinedstatus"
+            android:id="@+id/btn_add_addfriend"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="친구 등록"/>
+    </RelativeLayout>
+</LinearLayout>
