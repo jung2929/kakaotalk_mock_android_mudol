@@ -2,6 +2,7 @@ package com.computer.inu.sqkakaotalk;
 
 import android.app.Activity;
 import android.content.Context;
+import com.computer.inu.sqkakaotalk.network.ApplicationController;
 import com.kakao.auth.*;
 
 public class KakaoSDKAdapter extends KakaoAdapter {
@@ -41,12 +42,12 @@ public class KakaoSDKAdapter extends KakaoAdapter {
         return new IApplicationConfig() {
             @Override
             public Activity getTopActivity() {
-                return GlobalApplication.getCurrentActivity();
+                return ApplicationController.Companion.getCurrentActivity();
             }
 
             @Override
             public Context getApplicationContext() {
-                return GlobalApplication.getGlobalApplicationContext();
+                return ApplicationController.Companion.getGlobalApplicationContext();
             }
         };
     }

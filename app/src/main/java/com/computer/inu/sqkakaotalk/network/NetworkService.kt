@@ -1,13 +1,18 @@
-package com.computer.inu.sqkakaotalk.Network
+package com.computer.inu.sqkakaotalk.network
 
-import com.google.gson.JsonObject
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
 
 interface NetworkService {
 
+    @GET("/v2/user/me")
+    fun getUserInfomationResponse(
+        @Header("Authorization") Authorization: String
+    ): Call<GetUserInfomationResponse>
 
+    @GET("/v2/user/me")
+    fun getCodeResponse(
+        @Header("Authorization") Authorization: String
+    ): Call<GetUserInfomationResponse>
 }

@@ -6,11 +6,16 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.widget.Toast
 import com.computer.inu.sqkakaotalk.Fragment.*
+import com.computer.inu.sqkakaotalk.network.ApplicationController
+import com.computer.inu.sqkakaotalk.network.NetworkService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var backPressedTime: Long = 0
     val FINISH_INTERVAL_TIME = 2000
+    val networkService: NetworkService by lazy {
+        ApplicationController.instance.networkService
+    }
     override fun onBackPressed() {
         var tempTime = System.currentTimeMillis()
         var intervalTime = tempTime - backPressedTime
