@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.computer.inu.sqkakaotalk.network.NetworkService
+import com.gun0912.tedpermission.PermissionListener
 import com.kakao.auth.ErrorCode
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -47,17 +48,6 @@ class LoginActivity : AppCompatActivity() {
         if(intent.getStringExtra("clear")=="clear")
             SharedPreferenceController.SetclearSignUp(this)
 
-        if(SharedPreferenceController.getAutoAuthorization(this).isNotEmpty()){
-            startActivity<MainActivity>()
-            toast("자동로그인 되었습니다")
-        }
-
-
-        btn_login_loginbutton.setOnClickListener {
-            if(cb_login_autologinCheckbox.isChecked==true)
-SharedPreferenceController.setAutoAuthorization(this,"token")
-            startActivity<MainActivity>()
-        }
         tv_login_signup.setOnClickListener {
             startActivity<SignUpActivity>()
         }
