@@ -45,10 +45,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
     <ImageView
+        android:id="@+id/iv_game_translate"
       android:background="#ffffff"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/adimage"/>
+        android:layout_height="200dp"
+        android:src="@drawable/kakaotranslate"/>
      <RelativeLayout
          android:background="#ffffff"
          android:layout_width="match_parent"
