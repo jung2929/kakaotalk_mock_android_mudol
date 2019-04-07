@@ -1,9 +1,9 @@
 package com.computer.inu.sqkakaotalk
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.computer.inu.sqkakaotalk.Fragment.*
 import com.computer.inu.sqkakaotalk.network.ApplicationController
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(FriendListFragment())
             iv_main_human.setImageResource(R.drawable.clickedhuman)
             iv_main_message.setImageResource(R.drawable.message)
-            iv_main_shap.setImageResource(R.drawable.shap)
+            iv_main_shap.setImageResource(R.drawable.location)
             iv_main_star.setImageResource(R.drawable.star)
             iv_main_more.setImageResource(R.drawable.more)
         }
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(Message_Fragment())
             iv_main_human.setImageResource(R.drawable.human)
             iv_main_message.setImageResource(R.drawable.clickedmessage)
-            iv_main_shap.setImageResource(R.drawable.shap)
+            iv_main_shap.setImageResource(R.drawable.location)
             iv_main_star.setImageResource(R.drawable.star)
             iv_main_more.setImageResource(R.drawable.more)
         }
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(NewsFragment())
             iv_main_human.setImageResource(R.drawable.human)
             iv_main_message.setImageResource(R.drawable.message)
-            iv_main_shap.setImageResource(R.drawable.clickedshap)
+            iv_main_shap.setImageResource(R.drawable.location)
             iv_main_star.setImageResource(R.drawable.star)
             iv_main_more.setImageResource(R.drawable.more)
         }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(GameFragment())
             iv_main_human.setImageResource(R.drawable.human)
             iv_main_message.setImageResource(R.drawable.message)
-            iv_main_shap.setImageResource(R.drawable.shap)
+            iv_main_shap.setImageResource(R.drawable.location)
             iv_main_star.setImageResource(R.drawable.clickedstar)
             iv_main_more.setImageResource(R.drawable.more)
         }
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(MyProfile_fragment())
             iv_main_human.setImageResource(R.drawable.human)
             iv_main_message.setImageResource(R.drawable.message)
-            iv_main_shap.setImageResource(R.drawable.shap)
+            iv_main_shap.setImageResource(R.drawable.location)
             iv_main_star.setImageResource(R.drawable.star)
             iv_main_more.setImageResource(R.drawable.clickedmore)
         }

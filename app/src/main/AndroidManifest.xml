@@ -17,6 +17,7 @@
         android:name="com.kakao.sdk.ClientSecret"
         android:value="kakao client secret value" />
     <application
+        android:usesCleartextTraffic="true"
         android:name=".network.ApplicationController"
         android:allowBackup="true"
         android:icon="@drawable/kakaotalklogo"
@@ -24,7 +25,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapjavaActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,7 +40,6 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".testjava" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".KakaoLogin" />
         <activity android:name=".AddKakaotalkIdActivity" />

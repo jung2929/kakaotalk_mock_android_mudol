@@ -251,7 +251,7 @@
                 android:layout_below="@+id/iv_mypage_mypicture"/>
             <TextView
                 android:id="@+id/tv_mypage_email"
-                android:text="dlfb77@gmaail.com"
+                android:text="dlfb77@gmail.com"
                 android:textSize="16dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"

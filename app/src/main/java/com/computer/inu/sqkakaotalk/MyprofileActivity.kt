@@ -1,27 +1,37 @@
 package com.computer.inu.sqkakaotalk
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_myprofile.*
-import org.jetbrains.annotations.Nullable
-import android.app.Activity
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.content.Intent
+import android.support.v7.app.AppCompatActivity
 import android.util.Base64
+import android.util.Log
+import com.bumptech.glide.Glide
+import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
+import com.computer.inu.sqkakaotalk.network.ApplicationController
+import com.computer.inu.sqkakaotalk.network.NetworkService
+import kotlinx.android.synthetic.main.activity_myprofile.*
+import org.jetbrains.anko.ctx
+import org.jetbrains.annotations.Nullable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
 
 
 class MyprofileActivity : AppCompatActivity() {
-
-
-
+    val networkService: NetworkService by lazy {
+        ApplicationController.instance.networkService
+    }
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myprofile)
+        getUserInfoPost()
         tv_myprofile_background.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         idfinish.setOnClickListener {
             finish()
@@ -74,7 +84,26 @@ class MyprofileActivity : AppCompatActivity() {
 
 
 
+    fun getUserInfoPost(){
+        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(this))
+        getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {
+            override fun onResponse(call: Call<GetUserInfomationResponse>?, response: Response<GetUserInfomationResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    tv_myprofile_myname.text = response.body()!!.properties.nickname
 
+                    Glide.with(ctx).load(response.body()!!.properties.profile_image.toString()).into(tv_myprofile_background)
+                    Glide.with(ctx).load(response.body()!!.properties.profile_image.toString()).into(iv_myprofile_mypicture)
+                }
+                else{
+                    Log.v("TAG", "마이페이지 서버 값 전달 실패")
+                }
+            }
+            override fun onFailure(call: Call<GetUserInfomationResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
 
 }
 

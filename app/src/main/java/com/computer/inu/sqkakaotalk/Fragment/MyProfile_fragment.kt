@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.computer.inu.sqkakaotalk.LoginActivity
-import com.computer.inu.sqkakaotalk.network.ApplicationController
-import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.PayActivity
 import com.computer.inu.sqkakaotalk.R
 import com.computer.inu.sqkakaotalk.SharedPreferenceController
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
+import com.computer.inu.sqkakaotalk.network.ApplicationController
+import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.post.PostLogoutResponse
 import kotlinx.android.synthetic.main.activity_my_profile_fragment.*
 import org.jetbrains.anko.support.v4.ctx
@@ -70,7 +69,10 @@ class MyProfile_fragment : Fragment() {
                 Log.v("TAG", "보드 서버 통신 연결")
                 if (response!!.isSuccessful) {
                     tv_main_myname.text = response.body()!!.properties.nickname
+                    tv_mypage_name.text= response.body()!!.properties.nickname
                         Glide.with(ctx).load(response.body()!!.properties.profile_image.toString()).into(iv_main_mypicture)
+                    Glide.with(ctx).load(response.body()!!.properties.profile_image.toString()).into(iv_mypage_mypicture)
+
                 }
                 else{
                     Log.v("TAG", "마이페이지 서버 값 전달 실패")

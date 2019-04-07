@@ -1,12 +1,18 @@
 package com.computer.inu.sqkakaotalk.Fragment
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.computer.inu.sqkakaotalk.*
 import com.computer.inu.sqkakaotalk.Adapter.BirthdayFriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Adapter.FavoriteFriendListRecyclerViewAdapter
@@ -14,18 +20,23 @@ import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Data.BirthdayFriendData
 import com.computer.inu.sqkakaotalk.Data.FavoriteFriendData
 import com.computer.inu.sqkakaotalk.Data.FriendData
+import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
+import com.computer.inu.sqkakaotalk.network.ApplicationController
+import com.computer.inu.sqkakaotalk.network.NetworkService
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.view.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import android.support.v7.widget.helper.ItemTouchHelper
-import android.support.v7.widget.RecyclerView
-import android.graphics.BitmapFactory
-import android.util.Base64
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class FriendListFragment : Fragment() {
+    val networkService: NetworkService by lazy {
+        ApplicationController.instance.networkService
+    }
     lateinit var BirthdayFriendListRecyclerViewAdapter: BirthdayFriendListRecyclerViewAdapter
     lateinit var FavoriteFriendListRecyclerViewAdapter: FavoriteFriendListRecyclerViewAdapter
     lateinit var FriendListRecyclerViewAdapter: FriendListRecyclerViewAdapter
@@ -103,17 +114,16 @@ class FriendListFragment : Fragment() {
         FavoriteFriendData.add(FavoriteFriendData("동기", ""))
         homeFragmentView.rl_friend_list_favoritepeople.adapter = FavoriteFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_favoritepeople.layoutManager = LinearLayoutManager(context!!)
-
         return homeFragmentView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){
+   /*     if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신 이전 부분
             val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_friend_mypicture.setImageBitmap(decodedByte)
-        }
+        }*/
         tv_friend_list_count.setText(FriendData.size.toString())
         iv_friend_addid.setOnClickListener {
             startActivity<AddKakaotalkIdActivity>()
@@ -187,8 +197,26 @@ class FriendListFragment : Fragment() {
           ctx.startActivity(intent)
             (ctx as MainActivity).overridePendingTransition(R.anim.sliding_up,R.anim.stay  )
         }
+        getUserInfoPost()
     }
-
+    fun getUserInfoPost(){
+        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(ctx))
+        getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {
+            override fun onResponse(call: Call<GetUserInfomationResponse>?, response: Response<GetUserInfomationResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    tv_friend_myname.text = response.body()!!.properties.nickname
+                    Glide.with(ctx).load(response.body()!!.properties.profile_image.toString()).into(iv_friend_mypicture)
+                }
+                else{
+                    Log.v("TAG", "마이페이지 서버 값 전달 실패")
+                }
+            }
+            override fun onFailure(call: Call<GetUserInfomationResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
     override fun onResume() {
         super.onResume()
         ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
