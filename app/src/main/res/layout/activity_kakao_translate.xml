@@ -20,6 +20,30 @@
         android:layout_height="wrap_content"
         android:text="번역 할 문장"
         android:fontFamily="@font/bamin"/>
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Spinner
+        android:layout_marginLeft="80dp"
+        android:id="@+id/sp_translate_before"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Spinner>
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="에서 "/>
+        <Spinner
+            android:layout_marginLeft="26dp"
+            android:id="@+id/sp_translate_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로 번역 "/>
+    </LinearLayout>
 <EditText
   android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"

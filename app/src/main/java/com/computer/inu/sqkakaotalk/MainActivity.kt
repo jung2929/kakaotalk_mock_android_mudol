@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             iv_main_more.setImageResource(R.drawable.more)
         }
         iv_main_star.setOnClickListener {
-            replaceFragment(GameFragment())
+            replaceFragment(GameTranslateFragment())
             iv_main_human.setImageResource(R.drawable.human)
             iv_main_message.setImageResource(R.drawable.message)
             iv_main_shap.setImageResource(R.drawable.location)

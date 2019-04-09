@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#08646460"
-    tools:context=".Fragment.GameFragment">
+    tools:context=".Fragment.GameTranslateFragment">
     <RelativeLayout
         android:background="#ffffff"
         android:layout_width="match_parent"
