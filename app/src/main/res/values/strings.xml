@@ -5,4 +5,8 @@
     <string name="kakao_app_key">d752d08c98a48b862f5747ba31e015fd</string>
     <string name="userToken">o-LwIY1vE4xlhOA5276lOK4qKqnXWd3_D0u-pgo9dJkAAAFp5m8yuQ</string>
     <string name="title_activity_maps">Map</string>
+    <string name="language">언어</string>
+    <string name="language_prompt">언어 선택</string>
+    <string-array name="language_array"><item>영어</item><item>일본어</item><item>중국어</item><item>베트남어</item><item>인도네시아어</item></string-array>
+
 </resources>

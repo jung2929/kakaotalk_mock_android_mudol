@@ -25,16 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <Spinner
-        android:layout_marginLeft="80dp"
-        android:id="@+id/sp_translate_before"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Spinner>
+
  <TextView
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="에서 "/>
+     android:text="한국어 에서 "/>
         <Spinner
+            android:prompt="@string/language_prompt"
             android:layout_marginLeft="26dp"
             android:id="@+id/sp_translate_after"
             android:layout_width="wrap_content"
