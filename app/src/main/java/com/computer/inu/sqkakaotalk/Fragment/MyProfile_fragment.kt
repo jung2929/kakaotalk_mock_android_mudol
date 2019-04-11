@@ -54,9 +54,16 @@ class MyProfile_fragment : Fragment() {
             lr_profile_allview.visibility=View.VISIBLE
         }
         tv_myprofile_logout.setOnClickListener {
-            toast("로그아웃 시도")
+
             if(SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty())
-            {PostkakaoLogoutResponse()}
+            { PostkakaoLogoutResponse()
+             SharedPreferenceController.clearKaKaoSPC(ctx)
+                toast("카카오 로그아웃")
+            }else if(SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()){
+                SharedPreferenceController.clearSQSPC(ctx)
+                toast("SQ 로그아웃")
+                activity!!.finish()
+            }
         }
         tv_myprofile_pay.setOnClickListener {
             startActivity<PayActivity>()

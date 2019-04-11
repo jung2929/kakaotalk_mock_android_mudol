@@ -19,6 +19,7 @@ import com.kakao.usermgmt.callback.MeResponseCallback
 import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.ctx
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
@@ -103,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                     val token = Session.getCurrentSession().accessToken
                     SharedPreferenceController.setKaKaOAuthorization(this@LoginActivity,token)
                     Log.v("TAG", token)
-                    toast(token)
+
                      startActivity<MainActivity>()
                 }
             })
@@ -129,7 +130,12 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<PostLoginResponse>?, response: Response<PostLoginResponse>?) {
                 Log.v("TAG", "보드 서버 통신 연결")
                 if (response!!.isSuccessful) {
-                    toast(response.body()!!.message.toString())
+                    if(response.body()!!.message=="성공"){
+                   SharedPreferenceController.setSQAuthorization(ctx,response.body()!!.token.jwt.toString())
+                    startActivity<MainActivity>()}
+                    else {
+                        toast("아이디 또는 비밀번호가 틀렸습니다.")
+                    }
                 }
                 else{
                     Log.v("TAG", "마이페이지 서버 값 전달 실패")

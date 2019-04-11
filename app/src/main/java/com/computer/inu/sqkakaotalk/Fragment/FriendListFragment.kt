@@ -197,6 +197,8 @@ class FriendListFragment : Fragment() {
         }
         if (SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty()) { //카카오 로그인일때 통신
             getUserKAKAOInfoPost()
+        } else if(SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()){
+            //sq 통신
         }
     }
     fun getUserKAKAOInfoPost(){
@@ -217,6 +219,7 @@ class FriendListFragment : Fragment() {
             }
         })
     }
+    
     override fun onResume() {
         super.onResume()
         ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼

@@ -7,11 +7,13 @@ object SharedPreferenceController {
 
     private val USER = "USER"
     private val AUTO = "AUTO"
+    private val SQAUTO = "SQAUTO"
     private val FRINED = "FRIEND"
     private  val IMAGE = "IMAGE"
 
     private  val FRIEND_Image = "image"
     private val myAutoAuth = "myAuth"
+    private val mySQAutoAuth = "mySQAuth"
     private val USER_NAME: String = "user_name"
     private val USER_PW: String = "user_pw"
     private val USER_EMAIL: String = "user_email"
@@ -83,7 +85,7 @@ object SharedPreferenceController {
         return pref.getString(myAutoAuth, "")
     }
 
-    //로그아웃시 자동로그인을 위한 토큰 초기화
+    //카카오로그인 된거 로그아웃
     fun clearKaKaoSPC(context: Context) {
         val pref = context.getSharedPreferences(AUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -93,6 +95,26 @@ object SharedPreferenceController {
 // 회원가입 정보 초기화
     fun SetclearSignUp(context: Context) {
         val pref = context.getSharedPreferences(USER, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.clear()
+        editor.commit()
+    }
+    // 카카오 로그인 토큰
+    fun setSQAuthorization(context: Context, authorization: String) {
+        val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(mySQAutoAuth, authorization)
+        editor.commit()
+    }
+
+    fun getSQAuthorization(context: Context): String {
+        val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
+        return pref.getString(mySQAutoAuth, "")
+    }
+
+    //카카오로그인 된거 로그아웃
+    fun clearSQSPC(context: Context) {
+        val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.commit()
