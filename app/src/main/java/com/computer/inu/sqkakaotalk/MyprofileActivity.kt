@@ -31,7 +31,9 @@ class MyprofileActivity : AppCompatActivity() {
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myprofile)
-        getUserInfoPost()
+
+        if(SharedPreferenceController.getKaKaOAuthorization(this).isNotEmpty()){ // 카카오 로그인일때 정보받아오기
+        getKAKAOUserInfoPost()}
         tv_myprofile_background.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         idfinish.setOnClickListener {
             finish()
@@ -84,8 +86,8 @@ class MyprofileActivity : AppCompatActivity() {
 
 
 
-    fun getUserInfoPost(){
-        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(this))
+    fun getKAKAOUserInfoPost(){
+        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(this))
         getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {
             override fun onResponse(call: Call<GetUserInfomationResponse>?, response: Response<GetUserInfomationResponse>?) {
                 Log.v("TAG", "보드 서버 통신 연결")

@@ -1,13 +1,11 @@
 package com.computer.inu.sqkakaotalk.Fragment
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -119,7 +117,7 @@ class FriendListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-   /*     if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신 이전 부분
+        /*     if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신 이전 부분
             val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_friend_mypicture.setImageBitmap(decodedByte)
@@ -128,79 +126,81 @@ class FriendListFragment : Fragment() {
         iv_friend_addid.setOnClickListener {
             startActivity<AddKakaotalkIdActivity>()
         }
-        ll_friend_addfriend.visibility=View.GONE
+        ll_friend_addfriend.visibility = View.GONE
 
         iv_friend_finishaddfriend.setOnClickListener {
-            ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
-            rl_friend_color.visibility=View.GONE
+            ll_friend_addfriend.visibility = View.GONE     //친구추가 X 버튼
+            rl_friend_color.visibility = View.GONE
         }
-        rl_friend_color.visibility=View.GONE
+        rl_friend_color.visibility = View.GONE
         iv_friend_plusfriend.setOnClickListener {
-            ll_friend_addfriend.visibility=View.VISIBLE
-            rl_friend_color.visibility=View.VISIBLE
+            ll_friend_addfriend.visibility = View.VISIBLE
+            rl_friend_color.visibility = View.VISIBLE
         }
         rl_friend_color.setOnClickListener {
-            ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
-            rl_friend_color.visibility=View.GONE
+            ll_friend_addfriend.visibility = View.GONE     //친구추가 X 버튼
+            rl_friend_color.visibility = View.GONE
         }
 
 
         iv_friend_birthdayfriendlis_button.setOnClickListener {
-            if(rl_friend_list_birthdatpeople.visibility==View.VISIBLE){
+            if (rl_friend_list_birthdatpeople.visibility == View.VISIBLE) {
                 iv_friend_birthdayfriendlis_button.setImageResource(R.drawable.downbutton)
-                rl_friend_list_birthdatpeople.visibility=View.GONE
+                rl_friend_list_birthdatpeople.visibility = View.GONE
 
-            }else if (rl_friend_list_birthdatpeople.visibility==View.GONE){
+            } else if (rl_friend_list_birthdatpeople.visibility == View.GONE) {
                 iv_friend_birthdayfriendlis_button.setImageResource(R.drawable.upbutton)
-                rl_friend_list_birthdatpeople.visibility=View.VISIBLE
+                rl_friend_list_birthdatpeople.visibility = View.VISIBLE
 
             }
         }
         iv_friend_favorite_button.setOnClickListener {
-            if(rl_friend_list_favoritepeople.visibility==View.VISIBLE){
-                rl_friend_list_favoritepeople.visibility=View.GONE
+            if (rl_friend_list_favoritepeople.visibility == View.VISIBLE) {
+                rl_friend_list_favoritepeople.visibility = View.GONE
                 iv_friend_favorite_button.setImageResource(R.drawable.downbutton)
-            }else if (rl_friend_list_favoritepeople.visibility==View.GONE){
-                rl_friend_list_favoritepeople.visibility=View.VISIBLE
+            } else if (rl_friend_list_favoritepeople.visibility == View.GONE) {
+                rl_friend_list_favoritepeople.visibility = View.VISIBLE
                 iv_friend_favorite_button.setImageResource(R.drawable.upbutton)
             }
         }
         iv_friend_recommend_button.setOnClickListener {
-            if(rl_friend_list_recommend.visibility==View.VISIBLE){
-                rl_friend_list_recommend.visibility=View.GONE
+            if (rl_friend_list_recommend.visibility == View.VISIBLE) {
+                rl_friend_list_recommend.visibility = View.GONE
                 iv_friend_recommend_button.setImageResource(R.drawable.downbutton)
-            }else if (rl_friend_list_recommend.visibility==View.GONE){
-                rl_friend_list_recommend.visibility=View.VISIBLE
+            } else if (rl_friend_list_recommend.visibility == View.GONE) {
+                rl_friend_list_recommend.visibility = View.VISIBLE
                 iv_friend_recommend_button.setImageResource(R.drawable.upbutton)
             }
         }
         iv_friend_plus_button.setOnClickListener {
-            if(rl_friend_list_plus.visibility==View.VISIBLE){
-                rl_friend_list_plus.visibility=View.GONE
+            if (rl_friend_list_plus.visibility == View.VISIBLE) {
+                rl_friend_list_plus.visibility = View.GONE
                 iv_friend_plus_button.setImageResource(R.drawable.downbutton)
-            }else if (rl_friend_list_plus.visibility==View.GONE){
-                rl_friend_list_plus.visibility=View.VISIBLE
+            } else if (rl_friend_list_plus.visibility == View.GONE) {
+                rl_friend_list_plus.visibility = View.VISIBLE
                 iv_friend_plus_button.setImageResource(R.drawable.upbutton)
             }
         }
         iv_friend_list_button.setOnClickListener {
-            if(rl_friend_list_listpeople.visibility==View.VISIBLE){
-                rl_friend_list_listpeople.visibility=View.GONE
+            if (rl_friend_list_listpeople.visibility == View.VISIBLE) {
+                rl_friend_list_listpeople.visibility = View.GONE
                 iv_friend_list_button.setImageResource(R.drawable.downbutton)
-            }else if (rl_friend_list_listpeople.visibility==View.GONE){
-                rl_friend_list_listpeople.visibility=View.VISIBLE
+            } else if (rl_friend_list_listpeople.visibility == View.GONE) {
+                rl_friend_list_listpeople.visibility = View.VISIBLE
                 iv_friend_list_button.setImageResource(R.drawable.upbutton)
             }
         }
         rl_friend_list_myprofile.setOnClickListener {
-          val intent = Intent(ctx,MyprofileActivity::class.java)
-          ctx.startActivity(intent)
-            (ctx as MainActivity).overridePendingTransition(R.anim.sliding_up,R.anim.stay  )
+            val intent = Intent(ctx, MyprofileActivity::class.java)
+            ctx.startActivity(intent)
+            (ctx as MainActivity).overridePendingTransition(R.anim.sliding_up, R.anim.stay)
         }
-        getUserInfoPost()
+        if (SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty()) { //카카오 로그인일때 통신
+            getUserKAKAOInfoPost()
+        }
     }
-    fun getUserInfoPost(){
-        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(ctx))
+    fun getUserKAKAOInfoPost(){
+        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(ctx))
         getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {
             override fun onResponse(call: Call<GetUserInfomationResponse>?, response: Response<GetUserInfomationResponse>?) {
                 Log.v("TAG", "보드 서버 통신 연결")
@@ -221,11 +221,11 @@ class FriendListFragment : Fragment() {
         super.onResume()
         ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
         rl_friend_color.visibility=View.GONE
-        if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){
+/*        if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신전 사진 이미지
             val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_friend_mypicture.setImageBitmap(decodedByte)
-        }
+        }*/
     }
 
 }

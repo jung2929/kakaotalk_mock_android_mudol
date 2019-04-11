@@ -1,7 +1,7 @@
 package com.computer.inu.sqkakaotalk.post
 
 data class PostSignUpResponse (
-    var isSuccess : Boolean,
+    var result : String,
     var code : Int,
     var  message : String
     )

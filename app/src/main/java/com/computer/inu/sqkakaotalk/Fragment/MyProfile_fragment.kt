@@ -42,8 +42,8 @@ class MyProfile_fragment : Fragment() {
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_main_mypicture.setImageBitmap(decodedByte)
         }*/ //내부 DB에 저장된 사진을 입히는 과정
-
-        getUserInfoPost()
+ if(SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty()){
+        getkakaoUserInfoPost()}
         lr_profile_detail_mypge_allview.visibility=View.GONE
         iv_main_mypage.setOnClickListener {
             lr_profile_allview.visibility=View.GONE
@@ -55,18 +55,19 @@ class MyProfile_fragment : Fragment() {
         }
         tv_myprofile_logout.setOnClickListener {
             toast("로그아웃 시도")
-            PostLogoutResponse()
+            if(SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty())
+            {PostkakaoLogoutResponse()}
         }
         tv_myprofile_pay.setOnClickListener {
             startActivity<PayActivity>()
         }
 
     }
-    fun getUserInfoPost(){
-        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(ctx))
+    fun getkakaoUserInfoPost(){
+        var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(ctx))
         getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {
             override fun onResponse(call: Call<GetUserInfomationResponse>?, response: Response<GetUserInfomationResponse>?) {
-                Log.v("TAG", "보드 서버 통신 연결")
+                Log.v("TAG", "통신 연결")
                 if (response!!.isSuccessful) {
                     tv_main_myname.text = response.body()!!.properties.nickname
                     tv_mypage_name.text= response.body()!!.properties.nickname
@@ -75,7 +76,7 @@ class MyProfile_fragment : Fragment() {
 
                 }
                 else{
-                    Log.v("TAG", "마이페이지 서버 값 전달 실패")
+                    Log.v("TAG", "카카오통신 실패")
                 }
             }
             override fun onFailure(call: Call<GetUserInfomationResponse>?, t: Throwable?) {
@@ -83,19 +84,19 @@ class MyProfile_fragment : Fragment() {
             }
         })
     }
-    fun PostLogoutResponse(){
-        var postLogoutResponse: Call<PostLogoutResponse> = networkService.postLogoutResponse("Bearer "+SharedPreferenceController.getAutoAuthorization(ctx))
+    fun PostkakaoLogoutResponse(){
+        var postLogoutResponse: Call<PostLogoutResponse> = networkService.postLogoutResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(ctx))
         postLogoutResponse.enqueue(object : Callback<PostLogoutResponse> {
             override fun onResponse(call: Call<PostLogoutResponse>?, response: Response<PostLogoutResponse>?) {
-                Log.v("TAG", "보드 서버 통신 연결")
+                Log.v("TAG", "카카오 로그아웃 통신 ")
                 if (response!!.isSuccessful) {
-                    SharedPreferenceController.AutoclearSPC(ctx)
+                    SharedPreferenceController.clearKaKaoSPC(ctx)
                     toast("로그아웃 id="+response!!.body()!!.id.toString())
 
                     activity!!.finish()
                 }
                 else{
-                    Log.v("TAG", "마이페이지 서버 값 전달 실패")
+                    Log.v("TAG", "카카오 로그아웃 실패")
                 }
             }
             override fun onFailure(call: Call<PostLogoutResponse>?, t: Throwable?) {

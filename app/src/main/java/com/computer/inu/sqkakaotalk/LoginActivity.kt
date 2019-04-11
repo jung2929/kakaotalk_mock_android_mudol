@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
                     //                    Log.e("UserProfile", userProfile.getId() + "");
 
                     val token = Session.getCurrentSession().accessToken
-                    SharedPreferenceController.setAutoAuthorization(this@LoginActivity,token)
+                    SharedPreferenceController.setKaKaOAuthorization(this@LoginActivity,token)
                     Log.v("TAG", token)
                     toast(token)
                      startActivity<MainActivity>()
@@ -116,34 +116,30 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
-    private fun LoginPost() {
-//Json 형식의 객체 만들기
+
+    fun LoginPost(){
         var jsonObject = JSONObject()
-        jsonObject.put("name", et_login_email.text.toString())
-        jsonObject.put("pwd", et_login_pwd.text.toString())
+        jsonObject.put("Email", et_login_email.text.toString())
+        jsonObject.put("Pw", et_login_pwd.text.toString())
 
 //Gson 라이브러리의 Json Parser을 통해 객체를 Json으로!
         val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
-        val postLoginResponse: Call<PostLoginResponse> =
-            SqnetworkService.postLoginResponse("application/json", gsonObject)
+        var postLoginResponse: Call<PostLoginResponse> = SqnetworkService.postLoginResponse("application/json",gsonObject)
         postLoginResponse.enqueue(object : Callback<PostLoginResponse> {
-            override fun onFailure(call: Call<PostLoginResponse>, t: Throwable) {
-
-                toast("알수 없는 오류")
-            }
-            //통신 성공 시 수행되는 메소드
-            override fun onResponse(call: Call<PostLoginResponse>, response: Response<PostLoginResponse>) {
-                if (response.isSuccessful) {
-                   var message = response.body()!!.message!!
-                    if(message == "성공"){
-                        toast("로그인 성공")
-                        startActivity<MainActivity>()
-                    }
-                    else{
-                        toast("로그인 실패")
-                    }
+            override fun onResponse(call: Call<PostLoginResponse>?, response: Response<PostLoginResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    toast(response.body()!!.message.toString())
                 }
+                else{
+                    Log.v("TAG", "마이페이지 서버 값 전달 실패")
+                }
+            }
+            override fun onFailure(call: Call<PostLoginResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
             }
         })
     }
+
+
 }

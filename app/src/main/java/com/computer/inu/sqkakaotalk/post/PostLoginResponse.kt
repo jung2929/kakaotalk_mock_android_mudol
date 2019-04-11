@@ -1,6 +1,11 @@
 package com.computer.inu.sqkakaotalk.post
 
+import com.computer.inu.sqkakaotalk.Data.SqUserData
+import com.computer.inu.sqkakaotalk.Data.Token
+
 data class PostLoginResponse (
-var isSuccess : Boolean,
-var code : Int,
-var  message : String)
+    val token : Token,
+    val result : ArrayList<SqUserData>,
+    val code : Int,
+    val message : String
+)

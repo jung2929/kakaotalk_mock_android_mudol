@@ -70,21 +70,21 @@ object SharedPreferenceController {
         return pref.getString(USER_PW, "") // (키 명, 든게 없을때 리턴할 값)
     }
 
-    // 오직 자동로그인을 위한 토큰
-    fun setAutoAuthorization(context: Context, authorization: String) {
+    // 카카오 로그인 토큰
+    fun setKaKaOAuthorization(context: Context, authorization: String) {
         val pref = context.getSharedPreferences(AUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(myAutoAuth, authorization)
         editor.commit()
     }
 
-    fun getAutoAuthorization(context: Context): String {
+    fun getKaKaOAuthorization(context: Context): String {
         val pref = context.getSharedPreferences(AUTO, Context.MODE_PRIVATE)
         return pref.getString(myAutoAuth, "")
     }
 
     //로그아웃시 자동로그인을 위한 토큰 초기화
-    fun AutoclearSPC(context: Context) {
+    fun clearKaKaoSPC(context: Context) {
         val pref = context.getSharedPreferences(AUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
