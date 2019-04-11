@@ -1,11 +1,15 @@
 package com.computer.inu.sqkakaotalk
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
-import com.gun0912.tedpermission.PermissionListener
+import com.computer.inu.sqkakaotalk.network.SqNetworkService
+import com.computer.inu.sqkakaotalk.post.PostLoginResponse
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.kakao.auth.ErrorCode
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -17,14 +21,22 @@ import com.kakao.util.exception.KakaoException
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
     var backPressedTime: Long = 0
     val FINISH_INTERVAL_TIME = 2000
      private var callback: SessionCallback=SessionCallback()
-    lateinit var networkService : NetworkService
-
+    val networkService: NetworkService by lazy {
+        ApplicationController.instance.networkService
+    }
+    val SqnetworkService: SqNetworkService by lazy {
+        ApplicationController.instance.SqnetworkService
+    }
     override fun onBackPressed() {
         var tempTime = System.currentTimeMillis()
         var intervalTime = tempTime - backPressedTime
@@ -47,6 +59,10 @@ class LoginActivity : AppCompatActivity() {
 
         if(intent.getStringExtra("clear")=="clear")
             SharedPreferenceController.SetclearSignUp(this)
+
+        btn_login_loginbutton.setOnClickListener {
+            LoginPost()    //로그인통신
+        }
 
         tv_login_signup.setOnClickListener {
             startActivity<SignUpActivity>()
@@ -99,5 +115,35 @@ class LoginActivity : AppCompatActivity() {
             // 세션 연결이 실패했을때
 
         }
+    }
+    private fun LoginPost() {
+//Json 형식의 객체 만들기
+        var jsonObject = JSONObject()
+        jsonObject.put("name", et_login_email.text.toString())
+        jsonObject.put("pwd", et_login_pwd.text.toString())
+
+//Gson 라이브러리의 Json Parser을 통해 객체를 Json으로!
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        val postLoginResponse: Call<PostLoginResponse> =
+            SqnetworkService.postLoginResponse("application/json", gsonObject)
+        postLoginResponse.enqueue(object : Callback<PostLoginResponse> {
+            override fun onFailure(call: Call<PostLoginResponse>, t: Throwable) {
+
+                toast("알수 없는 오류")
+            }
+            //통신 성공 시 수행되는 메소드
+            override fun onResponse(call: Call<PostLoginResponse>, response: Response<PostLoginResponse>) {
+                if (response.isSuccessful) {
+                   var message = response.body()!!.message!!
+                    if(message == "성공"){
+                        toast("로그인 성공")
+                        startActivity<MainActivity>()
+                    }
+                    else{
+                        toast("로그인 실패")
+                    }
+                }
+            }
+        })
     }
 }
