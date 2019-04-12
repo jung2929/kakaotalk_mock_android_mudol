@@ -1,10 +1,7 @@
 package com.computer.inu.sqkakaotalk.network
 import com.computer.inu.sqkakaotalk.delete.DeleteFriendInfoResponse
 import com.computer.inu.sqkakaotalk.delete.DeleteUserInfoResponse
-import com.computer.inu.sqkakaotalk.get.GetDeleteFriendInfoResponse
-import com.computer.inu.sqkakaotalk.get.GetFriendResponse
-import com.computer.inu.sqkakaotalk.get.GetMystoryResponse
-import com.computer.inu.sqkakaotalk.get.GetprofileResponse
+import com.computer.inu.sqkakaotalk.get.*
 import com.computer.inu.sqkakaotalk.post.*
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -74,5 +71,21 @@ interface SqNetworkService {
         @Header("Content-type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<GetDeleteFriendInfoResponse>
-
+    @GET("/kacao/friend/{Name}")  //친구검색
+    fun getSearchFriendInfoResponse(
+        @Header("Content-type") content_type: String,
+        @Header("x-access-token") Authorization : String,
+        @Path("Name") Name: String
+    ): Call<GetSearchFriendInfoResponse>
+    @POST("/kacao/favorites")  //즐겨찾기 추가
+    fun postFavoriteResponse(
+        @Header("Content-type") content_type: String,
+        @Header("x-access-token") Authorization : String,
+        @Body() body: JsonObject
+    ): Call<PostFavoriteResponse>
+    @GET("/kacao/favorites")  //즐겨찾기 가져오기
+    fun getFavoriteResponse(
+        @Header("Content-type") content_type: String,
+        @Body() body: JsonObject   //Friend_Email
+    ): Call<GetFavoriteResponse>
 }

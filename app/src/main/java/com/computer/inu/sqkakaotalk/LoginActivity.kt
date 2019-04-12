@@ -53,7 +53,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
-
+if(SharedPreferenceController.getAutoLoginAuthorization(this).isNotEmpty()){
+    toast("자동로그인 되었습니다.")
+    startActivity<MainActivity>()
+}
         callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
         Session.getCurrentSession().checkAndImplicitOpen()
@@ -131,7 +134,14 @@ class LoginActivity : AppCompatActivity() {
                 Log.v("TAG", "보드 서버 통신 연결")
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공"){
+                        SharedPreferenceController.clearKaKaoSPC(ctx)
+                        SharedPreferenceController.clearSQSPC(ctx)
                    SharedPreferenceController.setSQAuthorization(ctx,response.body()!!.token.jwt.toString())
+
+                        if(cb_login_autologinCheckbox.isChecked==true){
+                            SharedPreferenceController.setAutoLoginAuthorization(this@LoginActivity,"auto")
+                        }
+
                     startActivity<MainActivity>()}
                     else {
                         toast("아이디 또는 비밀번호가 틀렸습니다.")

@@ -16,8 +16,10 @@ class MypageActivity : AppCompatActivity() {
         //카카오 로그인일때 로그아웃
         tv_mypage_logout.setOnClickListener {
             if (SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty()) {
+                SharedPreferenceController.clearAutoLogin(this)
                 SharedPreferenceController.clearKaKaoSPC(this)
             } else if (SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()) {
+                SharedPreferenceController.clearAutoLogin(this)
                   SharedPreferenceController.clearSQSPC(this)
             }
             finish()

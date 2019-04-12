@@ -58,9 +58,11 @@ class MyProfile_fragment : Fragment() {
             if(SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty())
             { PostkakaoLogoutResponse()
              SharedPreferenceController.clearKaKaoSPC(ctx)
+                SharedPreferenceController.clearAutoLogin(ctx)
                 toast("카카오 로그아웃")
             }else if(SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()){
                 SharedPreferenceController.clearSQSPC(ctx)
+                SharedPreferenceController.clearAutoLogin(ctx)
                 toast("SQ 로그아웃")
                 activity!!.finish()
             }
@@ -98,6 +100,7 @@ class MyProfile_fragment : Fragment() {
                 Log.v("TAG", "카카오 로그아웃 통신 ")
                 if (response!!.isSuccessful) {
                     SharedPreferenceController.clearKaKaoSPC(ctx)
+                    SharedPreferenceController.clearAutoLogin(ctx)
                     toast("로그아웃 id="+response!!.body()!!.id.toString())
 
                     activity!!.finish()

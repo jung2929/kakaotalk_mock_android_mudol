@@ -10,10 +10,12 @@ object SharedPreferenceController {
     private val SQAUTO = "SQAUTO"
     private val FRINED = "FRIEND"
     private  val IMAGE = "IMAGE"
+    private val AUTOLOGIN = "AUTOLOGIN"
 
     private  val FRIEND_Image = "image"
     private val myAutoAuth = "myAuth"
     private val mySQAutoAuth = "mySQAuth"
+    private val autologinAuth = "autologinAuth"
     private val USER_NAME: String = "user_name"
     private val USER_PW: String = "user_pw"
     private val USER_EMAIL: String = "user_email"
@@ -119,7 +121,26 @@ object SharedPreferenceController {
         editor.clear()
         editor.commit()
     }
+    //자동로그인 설정
+    fun setAutoLoginAuthorization(context: Context, authorization: String) {
+        val pref = context.getSharedPreferences(AUTOLOGIN, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(autologinAuth, authorization)
+        editor.commit()
+    }
+          //자동로그인
+    fun getAutoLoginAuthorization(context: Context): String {
+        val pref = context.getSharedPreferences(AUTOLOGIN, Context.MODE_PRIVATE)
+        return pref.getString(autologinAuth, "")
+    }
 
+    //자동로그인 토큰
+    fun clearAutoLogin(context: Context) {
+        val pref = context.getSharedPreferences(AUTOLOGIN, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.clear()
+        editor.commit()
+    }
 
     fun setIMAGE(ctx: Context, image: String) {
         val pref: SharedPreferences = ctx.getSharedPreferences(IMAGE, Context.MODE_PRIVATE)
