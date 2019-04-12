@@ -1,4 +1,5 @@
 package com.computer.inu.sqkakaotalk.network
+import com.computer.inu.sqkakaotalk.delete.DeleteFavoriteResponse
 import com.computer.inu.sqkakaotalk.delete.DeleteFriendInfoResponse
 import com.computer.inu.sqkakaotalk.delete.DeleteUserInfoResponse
 import com.computer.inu.sqkakaotalk.get.*
@@ -86,6 +87,18 @@ interface SqNetworkService {
     @GET("/kacao/favorites")  //즐겨찾기 가져오기
     fun getFavoriteResponse(
         @Header("Content-type") content_type: String,
+        @Header("x-access-token") Authorization : String,
         @Body() body: JsonObject   //Friend_Email
     ): Call<GetFavoriteResponse>
+    @DELETE("/kacao/favorites")  //즐겨찾기 삭제
+    fun deleteFavoriteResponse(
+        @Header("Content-type") content_type: String,
+        @Header("x-access-token") Authorization : String,
+        @Body() body: JsonObject   //Friend_Email
+    ): Call<DeleteFavoriteResponse>
+    @GET("/kacao/favorites")  //이모티콘 (전체)
+    fun getEmoticonResponse(
+        @Header("Content-type") content_type: String,
+        @Header("x-access-token") Authorization : String
+    ): Call<GetEmoticonResponse>
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/rv_emoticon_image"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/kakao"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+<LinearLayout
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="24dp"
+android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+    <TextView
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 오버액션 크레이지 다크토끼"
+        android:id="@+id/rv_emoticon_name"/>
+    <TextView
+        android:layout_marginTop="4dp"
+        android:id="@+id/rv_emoticon_made"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="made"/>
+</LinearLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.computer.inu.sqkakaotalk.EmoticonShopActivity
 import com.computer.inu.sqkakaotalk.PayActivity
 import com.computer.inu.sqkakaotalk.R
 import com.computer.inu.sqkakaotalk.SharedPreferenceController
@@ -36,7 +37,9 @@ class MyProfile_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        iv_myprofile_friendshop.setOnClickListener {
+         startActivity<EmoticonShopActivity>()
+        }
   /*      if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){
             val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
