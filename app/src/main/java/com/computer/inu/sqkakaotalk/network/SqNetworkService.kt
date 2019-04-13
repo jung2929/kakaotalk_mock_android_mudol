@@ -20,23 +20,23 @@ interface SqNetworkService {
     ): Call<PostSignUpResponse>
     @DELETE("/kacao/user")  //회원탈퇴
     fun deleteUserInfoResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<DeleteUserInfoResponse>
     @POST("/kacao/login")  //로그인
     fun postLoginResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Body() body: JsonObject
     ): Call<PostLoginResponse>
     @GET("/kacao/profile")  //프로필 사진 가져오기
     fun getprofileResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization: String
     ): Call<GetprofileResponse>
 
     @POST("/kacao/profile")  //프로필 변경
     fun postprofileResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization: String,
         @Body() body: JsonObject//"Prof_img" :"http://kaca5.com/imageP/%EA%B8%B0%EB%B3%B8_%ED%94%84%EC%82%AC.png",
                                  // Back_img" : "http://kaca5.com/imageP/%EA%B8%B0%EB%B3%B8_%EB%B0%B0%EA%B2%BD.png",
@@ -45,31 +45,31 @@ interface SqNetworkService {
 
     @GET("/kacao/mystory")  //프로필 히스토리
     fun getMystoryResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization: String
     ): Call<GetMystoryResponse>
     @GET("/kacao/friend")  //친구목록
     fun getFriendResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization: String
     ): Call<GetFriendResponse>
 
     @POST("/kacao/friend_add")  //친구추가
     fun postAddFriendResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization: String,
         @Body() body: JsonObject//	"Friend_Email":"test@naver.com",
                                  //    "Tel" : "01"
     ): Call<PostAddFriendResponse>
     @DELETE("/kacao/friend_delete")  //친구차단
     fun deleteFriendInfoResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
         @Body() body: JsonObject  //	"Friend_Email":"test@naver.com"
     ): Call<DeleteFriendInfoResponse>
     @GET("/kacao/friend_delete")  //차단한 친구 목록
     fun getDeleteFriendInfoResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<GetDeleteFriendInfoResponse>
     @GET("/kacao/friend/{Name}")  //친구검색
@@ -80,25 +80,25 @@ interface SqNetworkService {
     ): Call<GetSearchFriendInfoResponse>
     @POST("/kacao/favorites")  //즐겨찾기 추가
     fun postFavoriteResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
         @Body() body: JsonObject
     ): Call<PostFavoriteResponse>
     @GET("/kacao/favorites")  //즐겨찾기 가져오기
     fun getFavoriteResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
         @Body() body: JsonObject   //Friend_Email
     ): Call<GetFavoriteResponse>
     @DELETE("/kacao/favorites")  //즐겨찾기 삭제
     fun deleteFavoriteResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
         @Body() body: JsonObject   //Friend_Email
     ): Call<DeleteFavoriteResponse>
-    @GET("/kacao/favorites")  //이모티콘 (전체)
+    @GET("/kacao/emoticon")  //이모티콘 (전체)
     fun getEmoticonResponse(
-        @Header("Content-type") content_type: String,
+        @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<GetEmoticonResponse>
 }

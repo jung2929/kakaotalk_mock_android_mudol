@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.computer.inu.sqkakaotalk.Data.EmoticonData
+import com.bumptech.glide.RequestManager
+import com.computer.inu.sqkakaotalk.Data.EmoticonOneImageData
 import com.computer.inu.sqkakaotalk.R
 
 
-class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<EmoticonData>) : RecyclerView.Adapter<EmoticonShopRecyclerViewAdapter.Holder>() {
+class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<EmoticonOneImageData>, var requestManager: RequestManager) : RecyclerView.Adapter<EmoticonShopRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(ctx).inflate(R.layout.rv_item_emoticonshop, parent, false)
         return Holder(view)
@@ -24,7 +25,7 @@ class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.Name.text =dataList[position].Name
         holder.Made.text=dataList[position].Made
-        Glide.with(ctx).load(dataList[position].image).into(holder.image)
+        Glide.with(ctx).load(dataList[position]!!.image).into(holder.image)
         holder.Eno.text=dataList[position].Eno.toString()
     }
 
@@ -37,4 +38,5 @@ class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList
 
 
     }
+
 }
