@@ -25,6 +25,7 @@ class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList
         holder.Name.text =dataList[position].Name
         holder.Made.text=dataList[position].Made
         Glide.with(ctx).load(dataList[position].image).into(holder.image)
+        holder.Eno.text=dataList[position].Eno.toString()
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,7 +33,7 @@ class  EmoticonShopRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList
         val Name: TextView = itemView.findViewById(R.id.rv_emoticon_name) as TextView
         val Made : TextView =itemView.findViewById(R.id.rv_emoticon_made) as TextView
         val image:ImageView=itemView.findViewById(R.id.rv_emoticon_image) as ImageView
-        // val Eno
+        val Eno : TextView = itemView.findViewById(R.id.rv_emoticon_no) as TextView
 
 
     }

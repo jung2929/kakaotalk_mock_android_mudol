@@ -16,18 +16,19 @@
     android:textStyle="bold"
     android:textSize="30dp"/>
     <View
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#ECECEC"/>
     <LinearLayout
-        android:layout_marginTop="30dp"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 <LinearLayout
     android:background="#FFFDFD"
     android:orientation="vertical"
-    android:layout_width="100dp"
+    android:layout_width="80dp"
     android:layout_height="match_parent">
     <TextView
         android:layout_marginTop="30dp"
