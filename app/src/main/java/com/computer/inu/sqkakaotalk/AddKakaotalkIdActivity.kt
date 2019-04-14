@@ -9,8 +9,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.content.Intent
-
-
+import com.computer.inu.sqkakaotalk.Main.MainActivity
 
 
 class AddKakaotalkIdActivity : AppCompatActivity() {

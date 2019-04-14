@@ -48,9 +48,9 @@
         <activity android:name=".SignUp2Activity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MyprofileActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Main.MainActivity" />
         <activity android:name=".MypageActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

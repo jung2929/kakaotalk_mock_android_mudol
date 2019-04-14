@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.computer.inu.sqkakaotalk.Main.MainActivity;
 import com.kakao.auth.*;
-import com.kakao.auth.network.response.AccessTokenInfoResponse;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
-import com.kakao.util.helper.log.Logger;
 
 public class KakaoLogin extends AppCompatActivity {
     SessionCallback callback;
@@ -39,7 +38,7 @@ public class KakaoLogin extends AppCompatActivity {
         btn_login_loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent =  new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

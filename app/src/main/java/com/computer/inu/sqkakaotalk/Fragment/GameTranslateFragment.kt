@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.computer.inu.sqkakaotalk.KakaoTranslateActivity
-import com.computer.inu.sqkakaotalk.MainActivity
+import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.R
 import kotlinx.android.synthetic.main.activity_game_fragment.*
 import org.jetbrains.anko.support.v4.ctx

@@ -18,6 +18,7 @@ import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Data.BirthdayFriendData
 import com.computer.inu.sqkakaotalk.Data.FavoriteFriendData
 import com.computer.inu.sqkakaotalk.Data.FriendData
+import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService

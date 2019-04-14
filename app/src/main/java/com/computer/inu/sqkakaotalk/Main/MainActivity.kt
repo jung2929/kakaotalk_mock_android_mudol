@@ -1,4 +1,4 @@
-package com.computer.inu.sqkakaotalk
+package com.computer.inu.sqkakaotalk.Main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.computer.inu.sqkakaotalk.Fragment.*
+import com.computer.inu.sqkakaotalk.R
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
 import kotlinx.android.synthetic.main.activity_main.*
