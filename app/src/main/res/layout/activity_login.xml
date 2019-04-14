@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fef01b"
+    tools:context=".LoginActivity">
+
+
+<ImageView
+    android:layout_marginTop="80dp"
+    android:layout_gravity="center"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:src="@drawable/kakao"/>
+
+<EditText
+    android:id="@+id/et_login_email"
+    android:paddingLeft="8dp"
+    android:layout_marginTop="40dp"
+    android:layout_gravity="center"
+    android:layout_width="300dp"
+    android:layout_height="40dp"
+    android:hint="이메일"
+    android:textSize="13dp"
+    android:background="#ffffff"/>
+    <EditText
+        android:layout_marginTop="4dp"
+        android:id="@+id/et_login_pwd"
+        android:paddingLeft="8dp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:hint="비밀번호"
+        android:textSize="13dp"
+        android:background="#ffffff"/>
+    <Button
+        android:id="@+id/btn_login_loginbutton"
+        android:layout_marginTop="16dp"
+        android:background="#fffff5"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:text="로그인"
+        android:textSize="15dp"
+        android:textColor="#99999E"/>
+
+    <com.kakao.usermgmt.LoginButton
+        android:layout_marginTop="10dp"
+      android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/cb_login_autologinCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="잠금모드로 자동로그인"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginBottom="80dp"
+        android:gravity="bottom"
+     android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+        <TextView
+
+            android:layout_marginLeft="44dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/tv_login_signup"
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"/>
+        <TextView
+android:layout_marginRight="34dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_find_kakaopwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 재설정"/>
+    </RelativeLayout>
+
+</LinearLayout>

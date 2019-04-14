@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".KakaoTranslateActivity">
+    <ImageView
+        android:id="@+id/iv_traslate_finish"
+        android:layout_width="28dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/backbutton" />
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="번역 할 문장"
+        android:fontFamily="@font/bamin"/>
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="한국어 에서 "/>
+        <Spinner
+            android:prompt="@string/language_prompt"
+            android:layout_marginLeft="26dp"
+            android:id="@+id/sp_translate_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로 번역 "/>
+    </LinearLayout>
+<EditText
+  android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:id="@+id/edt_translate_before"
+    android:layout_marginTop="20dp"
+    android:textSize="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+</EditText>
+    <Button
+        android:id="@+id/btn_translation"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="번역하기"
+        android:background="#ffffff"
+        android:fontFamily="@font/bamin"/>
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:fontFamily="@font/bamin"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="번역 된 문장"/>
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="20dp"
+        android:id="@+id/tv_translate_after"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+    </TextView>
+</LinearLayout>
