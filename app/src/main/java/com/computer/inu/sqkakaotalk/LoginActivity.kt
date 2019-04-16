@@ -1,8 +1,11 @@
 package com.computer.inu.sqkakaotalk
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.network.ApplicationController
@@ -74,6 +77,7 @@ if(SharedPreferenceController.getAutoLoginAuthorization(this).isNotEmpty()){
         }
 
     }
+
 
     private inner class SessionCallback : ISessionCallback {
         override fun onSessionOpened() {

@@ -19,16 +19,8 @@ class Message_Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var homeFragmentView: View = inflater!!.inflate(R.layout.activity_message__fragment, container, false)
         MessageRecyclerViewAdapter= MessageRecyclerViewAdapter(context!!, dataList)
-        dataList.add(MessageData("손기창", "비밀메세지", "오후 11:31"))
-        dataList.add(MessageData("김은수", "뭐해", "오후 9:31"))
-        dataList.add(MessageData("이규영", "개강이야 이제 아이고", "오후 8:14"))
-        dataList.add(MessageData("손정범", "공부하자 공부 !!!", "오후 7:59"))
-        dataList.add(MessageData("양승희", "오늘 몇시야", "오후 6:13"))
-        dataList.add(MessageData("김우영", "귀~", "오후 4:23"))
-        dataList.add(MessageData("박재휘", "4호선", "오전 11:03"))
-        dataList.add(MessageData("고동한", "오 좋다 ㄱ ㄱ", "오전 09:28"))
-        dataList.add(MessageData("이찬호", "일어남?????", "오전 08:02"))
-        dataList.add(MessageData("설수연", "오늘 홍대에서 보는거다", "오전 7:01"))
+        dataList.add(MessageData("맹구", "비밀메세지", "오후 11:31"))
+        dataList.add(MessageData("유리", "뭐해", "오후 9:31"))
         homeFragmentView.rv_message.adapter = MessageRecyclerViewAdapter
         homeFragmentView.rv_message.layoutManager = LinearLayoutManager(context!!)
 

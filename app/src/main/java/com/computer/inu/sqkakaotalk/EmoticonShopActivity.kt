@@ -49,7 +49,7 @@ class EmoticonShopActivity : AppCompatActivity() {
                 Log.v("TAG", "이모티콘샵 서버 통신 연결")
 
                 if (response!!.isSuccessful) {
-                    toast("통신")
+
                     EmoticonItemList.clear()
                     EmoticonItemData.clear()
                     EmoticonOneImageiItemData.clear()
@@ -63,7 +63,7 @@ class EmoticonShopActivity : AppCompatActivity() {
                     rv_emoticonshop.adapter = EmoticonShopRecyclerViewAdapter
                     rv_emoticonshop.layoutManager = LinearLayoutManager(this@EmoticonShopActivity)
                 }else {
-                    toast("응답은 성공인데 통신실패")
+
                 }
             }
 
