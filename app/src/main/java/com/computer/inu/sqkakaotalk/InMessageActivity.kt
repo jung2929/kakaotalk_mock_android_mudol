@@ -10,6 +10,7 @@ class InMessageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_in_message)
+        tv_inmessage_name.setText(intent.getStringExtra("name"))
     }
 
 

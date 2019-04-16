@@ -101,4 +101,12 @@ interface SqNetworkService {
         @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<GetEmoticonResponse>
+
+    @POST("/kacao/chat")  //채팅봇
+    fun postChatResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("x-access-token") Authorization: String,
+        @Body() body: JsonObject//	"Name":"맹구",
+                                //  "Text" : "01"
+    ): Call<PostChatResponse>
 }

@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="주문배송"/>
+            android:text=""/>
     <TextView
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/rv_item_image"
@@ -37,7 +37,7 @@
         android:layout_marginLeft="12dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="안녕하세요~"/>
+        android:text=""/>
  <TextView
      android:layout_marginTop="20dp"
      android:layout_marginRight="8dp"
@@ -45,5 +45,5 @@
      android:layout_alignParentRight="true"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="오전 11:25"/>
+     android:text=""/>
     </RelativeLayout>

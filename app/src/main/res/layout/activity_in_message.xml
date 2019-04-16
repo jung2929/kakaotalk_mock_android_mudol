@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/secretmessage"
+    android:background="@drawable/chatroom"
     android:id="@+id/inmessage"
     tools:context=".InMessageActivity">
-
-
-</android.support.constraint.ConstraintLayout>
+<Button
+    android:id="@+id/btn_inmessage_backbutton"
+    android:background="#00ff0000"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content" />
+<TextView
+    android:id="@+id/tv_inmessage_name"
+    android:layout_marginTop="14dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#020202"
+    android:layout_gravity="center_horizontal"
+    android:textSize="20dp"/>
+    <ImageView
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/edtchatroom"/>
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/edt_message"
+        android:paddingLeft="4dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="90dp"
+        android:background="#00ff0000"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:text=""/>
+</FrameLayout>

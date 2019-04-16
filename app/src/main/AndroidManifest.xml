@@ -43,7 +43,8 @@
         <activity android:name=".KakaoLogin" />
         <activity android:name=".AddKakaotalkIdActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".InMessageActivity" />
+        <activity android:name=".InMessageActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".PayActivity" />
         <activity android:name=".SignUp2Activity" />
         <activity android:name=".SignUpActivity" />

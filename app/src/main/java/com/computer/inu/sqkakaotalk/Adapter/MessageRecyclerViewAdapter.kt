@@ -26,7 +26,7 @@ class  MessageRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<Mess
         holder.word.text =dataList[position].word
         holder.time.text=dataList[position].time
         holder.rl_message.setOnClickListener {
-            ctx.startActivity<InMessageActivity>()
+            ctx.startActivity<InMessageActivity>("name" to dataList[position].content)
         }
     }
 
