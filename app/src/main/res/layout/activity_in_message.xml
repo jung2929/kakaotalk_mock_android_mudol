@@ -7,6 +7,10 @@
     android:background="@drawable/chatroom"
     android:id="@+id/inmessage"
     tools:context=".InMessageActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/chattopbar"/>
 <Button
     android:id="@+id/btn_inmessage_backbutton"
     android:background="#00ff0000"
@@ -20,6 +24,14 @@
     android:textColor="#020202"
     android:layout_gravity="center_horizontal"
     android:textSize="20dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rl_message_chat"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="53dp">
+    </android.support.v7.widget.RecyclerView>
     <ImageView
         android:layout_gravity="bottom"
         android:layout_width="match_parent"

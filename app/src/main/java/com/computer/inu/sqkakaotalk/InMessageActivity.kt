@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import com.computer.inu.sqkakaotalk.Adapter.ChatRecyclerViewAdapter
+import com.computer.inu.sqkakaotalk.Data.ChatRoomData
 import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
@@ -29,12 +31,18 @@ class InMessageActivity : AppCompatActivity() {
     val SqnetworkService: SqNetworkService by lazy {
         ApplicationController.instance.SqnetworkService
     }
+    lateinit var ChatMessageRecyclerView :ChatRecyclerViewAdapter
+    val dataList : ArrayList<ChatRoomData> by lazy {
+        ArrayList<ChatRoomData>()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_in_message)
         if(SharedPreferenceController.getSQAuthorization(this).isNotEmpty()){
         tv_inmessage_name.setText(intent.getStringExtra("name"))
+            ChatMessageRecyclerView = ChatRecyclerViewAdapter(this,dataList)
+            dataList.add(ChatRoomData("hello"))
 
             edt_message.setOnEditorActionListener({ textView, action, event ->
                 var handled = false
