@@ -3,6 +3,7 @@ package com.computer.inu.sqkakaotalk
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -42,11 +43,13 @@ class InMessageActivity : AppCompatActivity() {
         if(SharedPreferenceController.getSQAuthorization(this).isNotEmpty()){
         tv_inmessage_name.setText(intent.getStringExtra("name"))
             ChatMessageRecyclerView = ChatRecyclerViewAdapter(this,dataList)
-            dataList.add(ChatRoomData("hello"))
-
+            rl_message_chat.adapter=ChatMessageRecyclerView
+            rl_message_chat.layoutManager=LinearLayoutManager(this)
             edt_message.setOnEditorActionListener({ textView, action, event ->
                 var handled = false
                 if (action == EditorInfo.IME_ACTION_DONE) {
+                    dataList.add(ChatRoomData(edt_message.text.toString()))
+
                     chattingPost()
                     edt_message.setText("")
                 }
@@ -62,19 +65,17 @@ class InMessageActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        inmessage.setBackgroundResource(R.drawable.secret)
     }
 
     override fun onRestart() {
         super.onRestart()
-        inmessage.setBackgroundResource(R.drawable.secretmessage)
+
 
     }
 
 
     override fun onStop() {
         super.onStop()
-        inmessage.setBackgroundResource(R.drawable.secret)
 
     }
 
