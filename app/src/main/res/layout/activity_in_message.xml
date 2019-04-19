@@ -26,6 +26,7 @@
     android:textSize="20dp"/>
 
     <android.support.v7.widget.RecyclerView
+
         android:id="@+id/rl_message_chat"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"

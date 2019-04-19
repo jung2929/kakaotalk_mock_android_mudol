@@ -3,6 +3,7 @@ package com.computer.inu.sqkakaotalk
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.util.Log
@@ -48,10 +49,8 @@ class InMessageActivity : AppCompatActivity() {
             edt_message.setOnEditorActionListener({ textView, action, event ->
                 var handled = false
                 if (action == EditorInfo.IME_ACTION_DONE) {
-                    dataList.add(ChatRoomData(edt_message.text.toString()))
-
-                    chattingPost()
-                    edt_message.setText("")
+                    dataList.add(ChatRoomData(edt_message.text.toString(),true))
+             chattingPost()
                 }
                 handled
             })
@@ -94,7 +93,12 @@ class InMessageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<PostChatResponse>?, response: Response<PostChatResponse>?) {
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공"){
-                         toast(response.body()!!.result.RText.toString())
+                        Handler().postDelayed(Runnable {
+                            dataList.add(ChatRoomData(response.body()!!.result.RText.toString(),false))
+                            rl_message_chat.adapter!!.notifyDataSetChanged()
+                        }, 500)//
+
+                        edt_message.setText("")
                     }
                 }
                 else{

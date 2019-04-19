@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
 import com.bumptech.glide.Glide
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
@@ -74,6 +75,8 @@ class MyprofileActivity : AppCompatActivity() {
             }
         }
     }
+
+
       public fun getBase64String ( bitmap : Bitmap)
     {
         val byteArrayOutputStream = ByteArrayOutputStream()
