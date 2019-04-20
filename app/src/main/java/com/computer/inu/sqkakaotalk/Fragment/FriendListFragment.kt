@@ -16,17 +16,23 @@ import com.computer.inu.sqkakaotalk.Adapter.BirthdayFriendListRecyclerViewAdapte
 import com.computer.inu.sqkakaotalk.Adapter.FavoriteFriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Data.BirthdayFriendData
+import com.computer.inu.sqkakaotalk.Data.ChatRoomData
 import com.computer.inu.sqkakaotalk.Data.FavoriteFriendData
 import com.computer.inu.sqkakaotalk.Data.FriendData
 import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
+import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
+import com.computer.inu.sqkakaotalk.network.SqNetworkService
+import com.computer.inu.sqkakaotalk.post.PostChatResponse
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.view.*
+import kotlinx.android.synthetic.main.activity_in_message.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +42,10 @@ class FriendListFragment : Fragment() {
     val networkService: NetworkService by lazy {
         ApplicationController.instance.networkService
     }
+    val SqnetworkService: SqNetworkService by lazy {
+        ApplicationController.instance.SqnetworkService
+    }
+
     lateinit var BirthdayFriendListRecyclerViewAdapter: BirthdayFriendListRecyclerViewAdapter
     lateinit var FavoriteFriendListRecyclerViewAdapter: FavoriteFriendListRecyclerViewAdapter
     lateinit var FriendListRecyclerViewAdapter: FriendListRecyclerViewAdapter
@@ -199,8 +209,29 @@ class FriendListFragment : Fragment() {
         if (SharedPreferenceController.getKaKaOAuthorization(ctx).isNotEmpty()) { //카카오 로그인일때 통신
             getUserKAKAOInfoPost()
         } else if(SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()){
-            //sq 통신
+            getMyProfile()  //sq 통신
         }
+    }
+    fun getMyProfile(){
+
+
+        var getProfileResponse: Call<GetprofileResponse> = SqnetworkService.getprofileResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
+        getProfileResponse.enqueue(object : Callback<GetprofileResponse> {
+            override fun onResponse(call: Call<GetprofileResponse>?, response: Response<GetprofileResponse>?) {
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공"){
+                        rv_tv_friend_friendcontents.setText(response.body()!!.result.Status.toString())
+                        Glide.with(ctx).load(response.body()!!.result.Prof_img.toString()).into(iv_friend_mypicture)
+                    }
+                }
+                else{
+                    Log.v("TAG", "채팅 실패")
+                }
+            }
+            override fun onFailure(call: Call<GetprofileResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
     }
     fun getUserKAKAOInfoPost(){
         var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(ctx))
