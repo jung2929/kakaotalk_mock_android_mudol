@@ -13,19 +13,20 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.computer.inu.sqkakaotalk.*
 import com.computer.inu.sqkakaotalk.Adapter.BirthdayFriendListRecyclerViewAdapter
+import com.computer.inu.sqkakaotalk.Adapter.EmoticonShopRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Adapter.FavoriteFriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
-import com.computer.inu.sqkakaotalk.Data.BirthdayFriendData
-import com.computer.inu.sqkakaotalk.Data.ChatRoomData
-import com.computer.inu.sqkakaotalk.Data.FavoriteFriendData
-import com.computer.inu.sqkakaotalk.Data.FriendData
+import com.computer.inu.sqkakaotalk.Data.*
 import com.computer.inu.sqkakaotalk.Main.MainActivity
+import com.computer.inu.sqkakaotalk.get.GetEmoticonResponse
+import com.computer.inu.sqkakaotalk.get.GetFriendResponse
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
 import com.computer.inu.sqkakaotalk.post.PostChatResponse
+import kotlinx.android.synthetic.main.activity_emoticon_shop.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.view.*
 import kotlinx.android.synthetic.main.activity_in_message.*
@@ -59,6 +60,7 @@ class FriendListFragment : Fragment() {
         ArrayList<FriendData>()
     }
 
+
     override fun onPause() {
         super.onPause()
 
@@ -71,13 +73,9 @@ class FriendListFragment : Fragment() {
         BirthdayFriendData.add(BirthdayFriendData("곽민", "2019년 행복하길"))
         homeFragmentView.rl_friend_list_birthdatpeople.adapter = BirthdayFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_birthdatpeople.layoutManager = LinearLayoutManager(context!!)
+ getFriendListpost()
 
 
-
-   if (SharedPreferenceController.getFriendName(ctx).isNotEmpty()){
-       FriendData.add(FriendData(SharedPreferenceController.getFriendName(ctx), "새로운 친구입니다."))
-       SharedPreferenceController.FriendNameclear(ctx)
-   }
         val simpleItemTouchCallback =
             object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
@@ -105,16 +103,8 @@ class FriendListFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(homeFragmentView.rl_friend_list_listpeople)
 
 
-        FriendListRecyclerViewAdapter=
-            FriendListRecyclerViewAdapter(context!!, FriendData)
-        FriendData.add(FriendData("곽민", "2019년 행복하길"))
-        FriendData.add(FriendData("고성진", "인천놀러와!~"))
-        FriendData.add(FriendData("동기", ""))
-        FriendData.add(FriendData("엄마", ""))
-        FriendData.add(FriendData("아빠", "전진통하라"))
-        FriendData.add(FriendData("2-7", ""))
-        homeFragmentView.rl_friend_list_listpeople.adapter = FriendListRecyclerViewAdapter
-        homeFragmentView.rl_friend_list_listpeople.layoutManager = LinearLayoutManager(context!!)
+
+
         FavoriteFriendListRecyclerViewAdapter=
             FavoriteFriendListRecyclerViewAdapter(context!!, FavoriteFriendData)
         FavoriteFriendData.add(FavoriteFriendData("엄마", ""))
@@ -133,7 +123,6 @@ class FriendListFragment : Fragment() {
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_friend_mypicture.setImageBitmap(decodedByte)
         }*/
-        tv_friend_list_count.setText(FriendData.size.toString())
         iv_friend_addid.setOnClickListener {
             startActivity<AddKakaotalkIdActivity>()
         }
@@ -212,9 +201,40 @@ class FriendListFragment : Fragment() {
             getMyProfile()  //sq 통신
         }
     }
+    fun getFriendListpost() {
+        var getFriendListResponse : Call<GetFriendResponse> = SqnetworkService.getFriendResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
+        getFriendListResponse.enqueue(object : Callback<GetFriendResponse> {
+            override fun onResponse(call: Call<GetFriendResponse>?, response: Response<GetFriendResponse>?) {
+                Log.v("TAG", "친구목록 불러오기")
+
+                if (response!!.isSuccessful) {
+
+                    FriendData.clear()
+
+
+                val  FriendDataList = response.body()!!.result!!
+
+                    for (i in 0..FriendDataList.size - 1) {
+                        FriendData.add(FriendData(FriendDataList[i].Name,FriendDataList[i].Email,FriendDataList[i].Prof_img,FriendDataList[i].Back_img,FriendDataList[i].Status))
+                    }
+                    FriendListRecyclerViewAdapter= FriendListRecyclerViewAdapter(context!!, FriendData)
+                    rl_friend_list_listpeople.adapter = FriendListRecyclerViewAdapter
+                    rl_friend_list_listpeople.layoutManager = LinearLayoutManager(context!!)
+                    tv_friend_list_count.setText(FriendData.size.toString())
+                }else {
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetFriendResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " + t.toString())
+                toast("통신실패")
+            }
+        })
+    }
+
+
     fun getMyProfile(){
-
-
         var getProfileResponse: Call<GetprofileResponse> = SqnetworkService.getprofileResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
         getProfileResponse.enqueue(object : Callback<GetprofileResponse> {
             override fun onResponse(call: Call<GetprofileResponse>?, response: Response<GetprofileResponse>?) {
