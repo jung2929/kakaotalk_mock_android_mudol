@@ -13,8 +13,11 @@ import android.util.Log
 import android.view.Gravity
 import com.bumptech.glide.Glide
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
+import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
+import com.computer.inu.sqkakaotalk.network.SqNetworkService
+import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_myprofile.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.annotations.Nullable
@@ -29,12 +32,19 @@ class MyprofileActivity : AppCompatActivity() {
     val networkService: NetworkService by lazy {
         ApplicationController.instance.networkService
     }
+    val SqnetworkService: SqNetworkService by lazy {
+        ApplicationController.instance.SqnetworkService
+    }
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myprofile)
 
-        if(SharedPreferenceController.getKaKaOAuthorization(this).isNotEmpty()){ // 카카오 로그인일때 정보받아오기
-        getKAKAOUserInfoPost()}
+        if (SharedPreferenceController.getKaKaOAuthorization(this).isNotEmpty()) { // 카카오 로그인일때 정보받아오기
+            getKAKAOUserInfoPost()
+        }else if(SharedPreferenceController.getSQAuthorization(this).isNotEmpty()){
+            getMyProfile()
+        }
+
         tv_myprofile_background.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         idfinish.setOnClickListener {
             finish()
@@ -87,7 +97,26 @@ class MyprofileActivity : AppCompatActivity() {
 
     }
 
-
+    fun getMyProfile(){
+        var getProfileResponse: Call<GetprofileResponse> = SqnetworkService.getprofileResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
+        getProfileResponse.enqueue(object : Callback<GetprofileResponse> {
+            override fun onResponse(call: Call<GetprofileResponse>?, response: Response<GetprofileResponse>?) {
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공"){
+                        Glide.with(ctx).load(response.body()!!.result.Prof_img.toString()).into(iv_myprofile_mypicture)
+                        Glide.with(ctx).load(response.body()!!.result.Back_img.toString()).into(tv_myprofile_background)
+                        tv_myprofile_status.setText(response.body()!!.result.Status.toString())
+                    }
+                }
+                else{
+                    Log.v("TAG", "채팅 실패")
+                }
+            }
+            override fun onFailure(call: Call<GetprofileResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
 
     fun getKAKAOUserInfoPost(){
         var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(this))

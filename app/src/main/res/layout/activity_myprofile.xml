@@ -35,6 +35,15 @@
      android:src="@drawable/bori"
      />
   <TextView
+      android:id="@+id/tv_myprofile_status"
+      android:layout_marginTop="200dp"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Test"
+      android:textSize="50dp"
+      android:textColor="#ffffff"/>
+  <TextView
       android:id="@+id/tv_myprofile_myname"
       android:layout_marginTop="16dp"
       android:layout_centerInParent="true"
@@ -45,6 +54,7 @@
       android:textColor="#000000"
       android:text="김무현"/>
   <TextView
+      android:id="@+id/tv_myprofile_email"
       android:layout_marginTop="15dp"
       android:layout_centerInParent="true"
       android:layout_below="@+id/tv_myprofile_myname"
