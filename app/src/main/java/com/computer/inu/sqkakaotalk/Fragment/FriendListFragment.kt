@@ -73,7 +73,7 @@ class FriendListFragment : Fragment() {
         BirthdayFriendData.add(BirthdayFriendData("곽민", "2019년 행복하길"))
         homeFragmentView.rl_friend_list_birthdatpeople.adapter = BirthdayFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_birthdatpeople.layoutManager = LinearLayoutManager(context!!)
- getFriendListpost()
+ //getFriendListpost()
 
 
         val simpleItemTouchCallback =
@@ -240,7 +240,7 @@ class FriendListFragment : Fragment() {
             override fun onResponse(call: Call<GetprofileResponse>?, response: Response<GetprofileResponse>?) {
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공"){
-                        rv_tv_friend_friendcontents.setText(response.body()!!.result.Status.toString())
+
                         Glide.with(ctx).load(response.body()!!.result.Prof_img.toString()).into(iv_friend_mypicture)
                     }
                 }

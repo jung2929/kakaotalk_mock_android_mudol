@@ -105,7 +105,6 @@ class MyprofileActivity : AppCompatActivity() {
                     if(response.body()!!.message=="성공"){
                         Glide.with(ctx).load(response.body()!!.result.Prof_img.toString()).into(iv_myprofile_mypicture)
                         Glide.with(ctx).load(response.body()!!.result.Back_img.toString()).into(tv_myprofile_background)
-                        tv_myprofile_status.setText(response.body()!!.result.Status.toString())
                     }
                 }
                 else{

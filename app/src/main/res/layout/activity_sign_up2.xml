@@ -42,6 +42,32 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:gravity="center_vertical"
+
+        android:layout_gravity="center"
+        android:layout_width="324dp"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/tv_sign_up2_phoneNumber"
+            android:textSize="14dp"
+            android:layout_marginLeft="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="핸드폰번호"/>
+        <EditText
+            android:id="@+id/et_sign_up2_phoneNumber"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="핸드폰번호"
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:layout_marginLeft="113dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:layout_width="324dp"
@@ -72,29 +98,43 @@
             android:layout_alignParentRight="true"
             android:id="@+id/tv_sign_up2_overlap_check"
             android:background="@color/colorPrimary"
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="38dp"
             android:textSize="10sp"
             android:textColor="#ffffff"
             android:gravity="center"
-            android:text="중복 확인"
+            android:text="인증번호 전송"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="324dp"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/tv_sign_up2_emailAuth"
+            android:textSize="14dp"
+            android:layout_marginLeft="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="인증번호"/>
+        <EditText
+            android:id="@+id/et_sign_up2_emailAuth"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Email 인증번호 입력"
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:inputType="textPassword"
+            android:layout_marginLeft="113dp"
             />
     </RelativeLayout>
 
 
-    <TextView
-        android:layout_marginTop="6dp"
-        android:layout_gravity="center"
-        android:id="@+id/tv_sign_up2_available_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:textColor="@color/colorPrimary"
-        android:lineSpacingExtra="7sp"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:text=""
-        />
 
     <RelativeLayout
         android:gravity="center_vertical"
@@ -111,6 +151,7 @@
             android:textColor="#000000"
             android:text="비밀번호"/>
         <EditText
+
             android:id="@+id/et_sign_up2_pw"
             android:background="@null"
             android:layout_width="wrap_content"

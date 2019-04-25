@@ -10,7 +10,7 @@ import retrofit2.http.*
 
 interface SqNetworkService {
     @POST("/kacao/emailAuthenticate")  //이메일 인증
-    fun posteEmailAuthenticateResponse(
+    fun postEmailAuthenticateResponse(
         @Body() body: JsonObject
     ): Call<PostEmailAuthenticateResponse>
 
