@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.computer.inu.sqkakaotalk.EmoticonShopActivity
-import com.computer.inu.sqkakaotalk.PayActivity
-import com.computer.inu.sqkakaotalk.R
-import com.computer.inu.sqkakaotalk.SharedPreferenceController
+import com.computer.inu.sqkakaotalk.*
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
@@ -50,7 +47,9 @@ class MyProfile_fragment : Fragment() {
 
         getMyprofilePost()
         getMyProfile()
-
+        tv_myprofile_banFriend.setOnClickListener {
+           startActivity<BanFriendActivity>()
+        }
         iv_myprofile_friendshop.setOnClickListener {
          startActivity<EmoticonShopActivity>()
         }

@@ -7,6 +7,10 @@ import com.computer.inu.sqkakaotalk.post.*
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.*
+import okhttp3.RequestBody
+import retrofit2.http.HTTP
+
+
 
 interface SqNetworkService {
     @POST("/kacao/emailAuthenticate")  //이메일 인증
@@ -61,12 +65,22 @@ interface SqNetworkService {
         @Body() body: JsonObject//	"Friend_Email":"test@naver.com",
                                  //    "Tel" : "01"
     ): Call<PostAddFriendResponse>
-    @DELETE("/kacao/friend_delete")  //친구차단
+
+    @HTTP(method = "DELETE", path = "/kacao/friend_delete", hasBody = true)
     fun deleteFriendInfoResponse(
         @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
-        @Path("Friend_Email") Friend_Email: String
-    ): Call<DeleteFriendInfoResponse>
+        @Body `object`: JsonObject
+    ):  Call<DeleteFriendInfoResponse>
+
+
+    @PATCH("/kacao/friend_delete")   //차단해제
+    fun RecoverFriendInfoResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("x-access-token") Authorization : String,
+        @Body() body: JsonObject
+    ):  Call<DeleteFriendInfoResponse>
+
     @GET("/kacao/friend_delete")  //차단한 친구 목록
     fun getDeleteFriendInfoResponse(
         @Header("Content-Type") content_type: String,
@@ -87,8 +101,7 @@ interface SqNetworkService {
     @GET("/kacao/favorites")  //즐겨찾기 가져오기
     fun getFavoriteResponse(
         @Header("Content-Type") content_type: String,
-        @Header("x-access-token") Authorization : String,
-        @Body() body: JsonObject   //Friend_Email
+        @Header("x-access-token") Authorization : String
     ): Call<GetFavoriteResponse>
     @DELETE("/kacao/favorites")  //즐겨찾기 삭제
     fun deleteFavoriteResponse(

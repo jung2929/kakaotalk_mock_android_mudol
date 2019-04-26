@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="70dp">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:id="@+id/rv_iv_friend_friendpicture"
@@ -19,7 +19,7 @@
         android:layout_toRightOf="@+id/rv_iv_friend_friendpicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="홍길동"/>
+        android:text=""/>
     <TextView
         android:layout_below="@+id/rv_tv_friend_friendname"
         android:gravity="center_vertical"
@@ -30,7 +30,7 @@
         android:layout_toRightOf="@+id/rv_iv_friend_friendpicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="즐겨찾기"/>
+        android:text=""/>
 
 
 </RelativeLayout>

@@ -4,7 +4,7 @@ import com.computer.inu.sqkakaotalk.Data.FavoritesData
 
 
 data class GetFavoriteResponse (
-    val result : FavoritesData,
+    val result : ArrayList<FavoritesData>,
     val code : Int,
     val message : String
 )

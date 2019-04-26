@@ -11,13 +11,18 @@ import com.computer.inu.sqkakaotalk.Fragment.FriendListFragment
 import com.computer.inu.sqkakaotalk.get.GetFriendResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
+import com.computer.inu.sqkakaotalk.post.PostFavoriteResponse
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_profile.*
 import kotlinx.android.synthetic.main.activity_myprofile.*
+import kotlinx.android.synthetic.main.activity_sign_up2.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +36,10 @@ class FriendProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_friend_profile)
         iv_idfinish.setOnClickListener {
             finish()
+        }
+        iv_friendprofile_star.setOnClickListener {
+            addFavoriteopost() //즐찾 추가
+
         }
         getFriendInfopost()
     }
@@ -52,6 +61,28 @@ class FriendProfileActivity : AppCompatActivity() {
 
 
             override fun onFailure(call: Call<GetFriendResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " + t.toString())
+                toast("통신실패")
+            }
+        })
+    }
+    fun addFavoriteopost() {
+        var jsonObject = JSONObject()
+        jsonObject.put("Friend_Email", tv_friendprofile_phonenumber.text.toString())
+
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        var addFavoriteResponse : Call<PostFavoriteResponse> = SqnetworkService.postFavoriteResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx),gsonObject)
+        addFavoriteResponse.enqueue(object : Callback<PostFavoriteResponse> {
+            override fun onResponse(call: Call<PostFavoriteResponse>?, response: Response<PostFavoriteResponse>?) {
+                Log.v("TAG", "즐겨찾기 추가")
+
+                if (response!!.isSuccessful) {
+                  toast("즐겨찾기 성공")
+                }
+            }
+
+
+            override fun onFailure(call: Call<PostFavoriteResponse>?, t: Throwable?) {
                 Log.v("TAG", "통신 실패 = " + t.toString())
                 toast("통신실패")
             }

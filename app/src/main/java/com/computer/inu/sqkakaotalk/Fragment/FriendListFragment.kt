@@ -19,10 +19,7 @@ import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Data.*
 import com.computer.inu.sqkakaotalk.Main.MainActivity
 import com.computer.inu.sqkakaotalk.delete.DeleteFriendInfoResponse
-import com.computer.inu.sqkakaotalk.get.GetEmoticonResponse
-import com.computer.inu.sqkakaotalk.get.GetFriendResponse
-import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
-import com.computer.inu.sqkakaotalk.get.GetprofileResponse
+import com.computer.inu.sqkakaotalk.get.*
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
@@ -35,6 +32,7 @@ import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.view.*
 import kotlinx.android.synthetic.main.activity_in_message.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_sign_up2.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -95,7 +93,7 @@ class FriendListFragment : Fragment() {
         homeFragmentView.rl_friend_list_birthdatpeople.adapter = BirthdayFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_birthdatpeople.layoutManager = LinearLayoutManager(context!!)
 
-
+        getFavoriteFriendListpost()
         getFriendListpost()
         val simpleItemTouchCallback =
             object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -112,11 +110,11 @@ class FriendListFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
 
                     val position = viewHolder.adapterPosition
-                   toast( FriendData[position].Email.toString())
+                    deleteFriendPost(FriendData[position].Email.toString())
                     FriendData.removeAt(position)
                     FriendListRecyclerViewAdapter.notifyItemRemoved(position)
                     tv_friend_list_count.setText(FriendData.size.toString())
-                    deleteFriendPost(FriendData[position].Email.toString())
+
 
                 }
             }
@@ -124,17 +122,6 @@ class FriendListFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(homeFragmentView.rl_friend_list_listpeople)
 
-
-
-
-        FavoriteFriendListRecyclerViewAdapter=
-            FavoriteFriendListRecyclerViewAdapter(context!!, FavoriteFriendData)
-        FavoriteFriendData.add(FavoriteFriendData("엄마", ""))
-        FavoriteFriendData.add(FavoriteFriendData("아빠", "전진통하라"))
-        FavoriteFriendData.add(FavoriteFriendData("2-7", ""))
-        FavoriteFriendData.add(FavoriteFriendData("동기", ""))
-        homeFragmentView.rl_friend_list_favoritepeople.adapter = FavoriteFriendListRecyclerViewAdapter
-        homeFragmentView.rl_friend_list_favoritepeople.layoutManager = LinearLayoutManager(context!!)
         return homeFragmentView
     }
 
@@ -262,15 +249,50 @@ class FriendListFragment : Fragment() {
             }
         })
     }
+    fun getFavoriteFriendListpost() {
+        var getFavoriteFriendListResponse : Call<GetFavoriteResponse> = SqnetworkService.getFavoriteResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
+        getFavoriteFriendListResponse.enqueue(object : Callback<GetFavoriteResponse> {
+            override fun onResponse(call: Call<GetFavoriteResponse>?, response: Response<GetFavoriteResponse>?) {
+                Log.v("TAG", "친구목록 불러오기")
+
+                if (response!!.isSuccessful) {
+
+                    FavoriteFriendData.clear()
+
+
+                    val  FavoriteFriendDataList = response.body()!!.result!!
+
+                    for (i in 0..FavoriteFriendDataList.size-1) {
+                        FavoriteFriendData.add(FavoriteFriendData(FavoriteFriendDataList[i].Email,FavoriteFriendDataList[i].Name,FavoriteFriendDataList[i].Prof_img,FavoriteFriendDataList[i].Back_img,FavoriteFriendDataList[i].Status))
+                    }
+
+                    FavoriteFriendListRecyclerViewAdapter= FavoriteFriendListRecyclerViewAdapter(context!!, FavoriteFriendData)
+                   rl_friend_list_favoritepeople.adapter = FavoriteFriendListRecyclerViewAdapter
+                   rl_friend_list_favoritepeople.layoutManager = LinearLayoutManager(context!!)
+                }else {
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetFavoriteResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " + t.toString())
+                toast("통신실패")
+            }
+        })
+    }
     fun deleteFriendPost(Friend_Email:String){
-        var deleteFriendResponse: Call<DeleteFriendInfoResponse> = SqnetworkService.deleteFriendInfoResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx),Friend_Email)
+        var jsonObject = JSONObject()
+            jsonObject.put("Friend_Email",Friend_Email)
+
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        var deleteFriendResponse: Call<DeleteFriendInfoResponse> = SqnetworkService.deleteFriendInfoResponse("application/json",
+            SharedPreferenceController.getSQAuthorization(ctx),gsonObject)
         deleteFriendResponse.enqueue(object : Callback<DeleteFriendInfoResponse> {
             override fun onResponse(call: Call<DeleteFriendInfoResponse>?, response: Response<DeleteFriendInfoResponse>?) {
-                Log.v("TAG", "보드 서버 통신 연결")
+                Log.v("TAG", "삭제")
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공") {
-
-
+                    toast("차단완료")
                     }
                 }
 

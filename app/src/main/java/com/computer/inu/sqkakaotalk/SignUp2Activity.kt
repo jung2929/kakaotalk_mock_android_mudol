@@ -62,7 +62,6 @@ class SignUp2Activity : AppCompatActivity() {
     fun postEmailAuthenticateResponse(){ //이메일 인증
         var jsonObject = JSONObject()
         jsonObject.put("SendEmail", et_sign_up2_email.text.toString())
-
         val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
         var postEmailAuthenticateResponse: Call<PostEmailAuthenticateResponse> = SqnetworkService.postEmailAuthenticateResponse(gsonObject)
         postEmailAuthenticateResponse.enqueue(object : Callback<PostEmailAuthenticateResponse> {

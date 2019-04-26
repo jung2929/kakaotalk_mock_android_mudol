@@ -24,6 +24,14 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_friendprofile_star"
+            android:layout_marginTop="420dp"
+            android:layout_marginRight="20dp"
+         android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/star"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="440dp"
             android:layout_alignParentRight="true"
