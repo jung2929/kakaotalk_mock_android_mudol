@@ -65,7 +65,7 @@ interface SqNetworkService {
     fun deleteFriendInfoResponse(
         @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
-        @Body() body: JsonObject  //	"Friend_Email":"test@naver.com"
+        @Path("Friend_Email") Friend_Email: String
     ): Call<DeleteFriendInfoResponse>
     @GET("/kacao/friend_delete")  //차단한 친구 목록
     fun getDeleteFriendInfoResponse(

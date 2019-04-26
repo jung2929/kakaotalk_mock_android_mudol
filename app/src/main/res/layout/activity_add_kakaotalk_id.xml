@@ -26,7 +26,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:textSize="20dp"
-            android:text="카카오톡 ID로 추가"
+            android:text="카카오톡 Email로 추가"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -44,7 +44,7 @@
     android:layout_marginTop="40dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="친구 카카오톡ID"
+    android:text="친구 Email ID"
     android:textSize="18dp"/>
 
     <EditText
@@ -73,15 +73,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="내아이디"/>
-       <TextView
-           android:layout_marginLeft="8dp"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:text="kmh0833"/>
+
    </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -115,15 +107,47 @@
         android:id="@+id/rl_add_myfriend"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_add_friend_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaultprofile"
+            app:civ_border_color="#0C353232"
+            app:civ_border_width="2dp" />
 
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/iv_add_friend_pic"
+            android:id="@+id/tv_add_frinedname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/tv_add_frinedname"
+            android:id="@+id/tv_add_frinedstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="새로운 친구입니다."/>
         <Button
             android:background="@color/colorPrimary"
             android:layout_marginTop="8dp"
             android:layout_centerInParent="true"
+            android:layout_below="@+id/tv_add_frinedstatus"
             android:id="@+id/btn_add_addfriend"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:text="친구 등록"/>
+            android:text="친구추가 완료"/>
     </RelativeLayout>
 </LinearLayout>

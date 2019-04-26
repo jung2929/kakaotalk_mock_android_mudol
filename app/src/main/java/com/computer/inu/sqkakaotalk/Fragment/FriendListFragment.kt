@@ -18,6 +18,7 @@ import com.computer.inu.sqkakaotalk.Adapter.FavoriteFriendListRecyclerViewAdapte
 import com.computer.inu.sqkakaotalk.Adapter.FriendListRecyclerViewAdapter
 import com.computer.inu.sqkakaotalk.Data.*
 import com.computer.inu.sqkakaotalk.Main.MainActivity
+import com.computer.inu.sqkakaotalk.delete.DeleteFriendInfoResponse
 import com.computer.inu.sqkakaotalk.get.GetEmoticonResponse
 import com.computer.inu.sqkakaotalk.get.GetFriendResponse
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
@@ -50,7 +51,26 @@ class FriendListFragment : Fragment() {
     val SqnetworkService: SqNetworkService by lazy {
         ApplicationController.instance.SqnetworkService
     }
+    companion object {
+        private var instance : FriendListFragment?=null
+        @Synchronized
+        fun getInstance(size : String) :FriendListFragment{
+            if(instance==null) {
+                instance = FriendListFragment().apply {
+                    arguments=Bundle().apply {
+                        putString("size", FriendData.size.toString())
+                    }
 
+                }
+            }
+            return instance!!
+
+        }
+
+        val FriendData : ArrayList<FriendData> by lazy {
+            ArrayList<FriendData>()
+        }
+    }
     lateinit var BirthdayFriendListRecyclerViewAdapter: BirthdayFriendListRecyclerViewAdapter
     lateinit var FavoriteFriendListRecyclerViewAdapter: FavoriteFriendListRecyclerViewAdapter
     lateinit var FriendListRecyclerViewAdapter: FriendListRecyclerViewAdapter
@@ -60,14 +80,11 @@ class FriendListFragment : Fragment() {
     val FavoriteFriendData : ArrayList<FavoriteFriendData> by lazy {
         ArrayList<FavoriteFriendData>()
     }
-    val FriendData : ArrayList<FriendData> by lazy {
-        ArrayList<FriendData>()
-    }
+
 
 
     override fun onPause() {
         super.onPause()
-
 
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -95,10 +112,11 @@ class FriendListFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
 
                     val position = viewHolder.adapterPosition
-                    toast(position.toString())
+                   toast( FriendData[position].Email.toString())
                     FriendData.removeAt(position)
                     FriendListRecyclerViewAdapter.notifyItemRemoved(position)
                     tv_friend_list_count.setText(FriendData.size.toString())
+                    deleteFriendPost(FriendData[position].Email.toString())
 
                 }
             }
@@ -127,8 +145,15 @@ class FriendListFragment : Fragment() {
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             iv_friend_mypicture.setImageBitmap(decodedByte)
         }*/
+
         iv_friend_addid.setOnClickListener {
-            startActivity<AddKakaotalkIdActivity>()
+       /*     val fragment = FriendListFragment() // Fragment 생성
+            val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
+            bundle.putString("size", FriendData.size.toString())
+            fragment.setArguments(bundle)*/
+            var intent = Intent(ctx,AddKakaotalkIdActivity::class.java)
+            intent.putExtra("size", FriendData.size)
+            startActivity(intent)
         }
         ll_friend_addfriend.visibility = View.GONE
 
@@ -237,7 +262,24 @@ class FriendListFragment : Fragment() {
             }
         })
     }
+    fun deleteFriendPost(Friend_Email:String){
+        var deleteFriendResponse: Call<DeleteFriendInfoResponse> = SqnetworkService.deleteFriendInfoResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx),Friend_Email)
+        deleteFriendResponse.enqueue(object : Callback<DeleteFriendInfoResponse> {
+            override fun onResponse(call: Call<DeleteFriendInfoResponse>?, response: Response<DeleteFriendInfoResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공") {
 
+
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<DeleteFriendInfoResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
     fun getMyprofilePost(){
         var jsonObject = JSONObject()
         jsonObject.put("Email",SharedPreferenceController.getEmail(ctx))
