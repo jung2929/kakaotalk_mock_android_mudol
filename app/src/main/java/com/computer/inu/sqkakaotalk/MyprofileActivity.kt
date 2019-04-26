@@ -17,10 +17,14 @@ import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
+import com.computer.inu.sqkakaotalk.post.PostLoginResponse
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_myprofile.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.annotations.Nullable
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +47,7 @@ class MyprofileActivity : AppCompatActivity() {
             getKAKAOUserInfoPost()
         }else if(SharedPreferenceController.getSQAuthorization(this).isNotEmpty()){
             getMyProfile()
+            getMyprofilePost2()
         }
 
         tv_myprofile_background.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
@@ -96,7 +101,32 @@ class MyprofileActivity : AppCompatActivity() {
        SharedPreferenceController.setIMAGE(this,Base64.encodeToString(imageBytes, Base64.NO_WRAP))
 
     }
+    fun getMyprofilePost2(){
+        var jsonObject = JSONObject()
+        jsonObject.put("Email",SharedPreferenceController.getEmail(ctx))
+        jsonObject.put("Pw", SharedPreferenceController.getPW(ctx))
 
+//Gson 라이브러리의 Json Parser을 통해 객체를 Json으로!
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        var postLoginResponse: Call<PostLoginResponse> = SqnetworkService.postLoginResponse("application/json",gsonObject)
+        postLoginResponse.enqueue(object : Callback<PostLoginResponse> {
+            override fun onResponse(call: Call<PostLoginResponse>?, response: Response<PostLoginResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공") {
+
+                        tv_myprofile_myname.setText(response.body()!!.result[0].Name.toString())
+                        tv_myprofile_email.setText(response.body()!!.result[0].Email.toString())
+
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<PostLoginResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
     fun getMyProfile(){
         var getProfileResponse: Call<GetprofileResponse> = SqnetworkService.getprofileResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
         getProfileResponse.enqueue(object : Callback<GetprofileResponse> {
@@ -116,7 +146,31 @@ class MyprofileActivity : AppCompatActivity() {
             }
         })
     }
+fun getMyprofilePost(){
+        var jsonObject = JSONObject()
+        jsonObject.put("Email",SharedPreferenceController.getEmail(ctx))
+        jsonObject.put("Pw", SharedPreferenceController.getPW(ctx))
 
+//Gson 라이브러리의 Json Parser을 통해 객체를 Json으로!
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        var postLoginResponse: Call<PostLoginResponse> = SqnetworkService.postLoginResponse("application/json",gsonObject)
+        postLoginResponse.enqueue(object : Callback<PostLoginResponse> {
+            override fun onResponse(call: Call<PostLoginResponse>?, response: Response<PostLoginResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공") {
+
+                                tv_friend_myname.setText(response.body()!!.result[0].Name.toString())
+
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<PostLoginResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
     fun getKAKAOUserInfoPost(){
         var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(this))
         getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {

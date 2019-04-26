@@ -11,10 +11,14 @@ object SharedPreferenceController {
     private val FRINED = "FRIEND"
     private  val IMAGE = "IMAGE"
     private val AUTOLOGIN = "AUTOLOGIN"
+    private val EMAIL = "EMAIL"
+    private val PW = "PW"
 
     private  val FRIEND_Image = "image"
     private val myAutoAuth = "myAuth"
     private val mySQAutoAuth = "mySQAuth"
+    private val myEmial = "myEmial"
+    private val myPW = "myPW"
     private val autologinAuth = "autologinAuth"
     private val USER_NAME: String = "user_name"
     private val USER_PW: String = "user_pw"
@@ -101,20 +105,18 @@ object SharedPreferenceController {
         editor.clear()
         editor.commit()
     }
-    // 카카오 로그인 토큰
+
     fun setSQAuthorization(context: Context, authorization: String) {
         val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(mySQAutoAuth, authorization)
         editor.commit()
     }
-
     fun getSQAuthorization(context: Context): String {
         val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
         return pref.getString(mySQAutoAuth, "")
     }
 
-    //카카오로그인 된거 로그아웃
     fun clearSQSPC(context: Context) {
         val pref = context.getSharedPreferences(SQAUTO, Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -152,5 +154,41 @@ object SharedPreferenceController {
     fun getIMAGE(ctx: Context): String {
         val pref: SharedPreferences = ctx.getSharedPreferences(IMAGE, Context.MODE_PRIVATE)
         return pref.getString(FRIEND_Image, "") // (키 명, 든게 없을때 리턴할 값)
+    }
+
+    fun setEmail(context: Context, authorization: String) {
+        val pref = context.getSharedPreferences(EMAIL, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(myEmial, authorization)
+        editor.commit()
+    }
+    fun getEmail(context: Context): String {
+        val pref = context.getSharedPreferences(EMAIL, Context.MODE_PRIVATE)
+        return pref.getString(myEmial, "")
+    }
+
+    fun clearEmail(context: Context) {
+        val pref = context.getSharedPreferences(EMAIL, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.clear()
+        editor.commit()
+    }
+
+    fun setPW(context: Context, authorization: String) {
+        val pref = context.getSharedPreferences(PW, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(myPW, authorization)
+        editor.commit()
+    }
+    fun getPW(context: Context): String {
+        val pref = context.getSharedPreferences(PW, Context.MODE_PRIVATE)
+        return pref.getString(myPW, "")
+    }
+
+    fun clearPW(context: Context) {
+        val pref = context.getSharedPreferences(PW, Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.clear()
+        editor.commit()
     }
 }

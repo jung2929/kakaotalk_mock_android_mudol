@@ -141,12 +141,13 @@ if(SharedPreferenceController.getAutoLoginAuthorization(this).isNotEmpty()){
                     if(response.body()!!.message=="성공"){
                         SharedPreferenceController.clearKaKaoSPC(ctx)
                         SharedPreferenceController.clearSQSPC(ctx)
-                   SharedPreferenceController.setSQAuthorization(ctx,response.body()!!.token.jwt.toString())
+                        SharedPreferenceController.setSQAuthorization(ctx,response.body()!!.token.jwt.toString())
 
                         if(cb_login_autologinCheckbox.isChecked==true){
                             SharedPreferenceController.setAutoLoginAuthorization(this@LoginActivity,"auto")
                         }
-
+                        SharedPreferenceController.setEmail(this@LoginActivity,et_login_email.text.toString())
+                        SharedPreferenceController.setPW(this@LoginActivity,et_login_pwd.text.toString())
                     startActivity<MainActivity>()}
                     else {
                         toast("아이디 또는 비밀번호가 틀렸습니다.")

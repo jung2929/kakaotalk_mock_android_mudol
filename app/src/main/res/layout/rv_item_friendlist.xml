@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:id="@+id/rl_friendlist_item"
     android:layout_height="70dp">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:id="@+id/rv_iv_friend_friendpicture"

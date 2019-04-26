@@ -22,6 +22,8 @@ class MypageActivity : AppCompatActivity() {
             } else if (SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()) {
                 SharedPreferenceController.clearAutoLogin(this)
                   SharedPreferenceController.clearSQSPC(this)
+                SharedPreferenceController.clearEmail(this)
+                SharedPreferenceController.clearPW(this)
             }
             finish()
             startActivity<LoginActivity>()

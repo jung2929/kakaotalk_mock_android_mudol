@@ -26,10 +26,14 @@ import com.computer.inu.sqkakaotalk.network.ApplicationController
 import com.computer.inu.sqkakaotalk.network.NetworkService
 import com.computer.inu.sqkakaotalk.network.SqNetworkService
 import com.computer.inu.sqkakaotalk.post.PostChatResponse
+import com.computer.inu.sqkakaotalk.post.PostLoginResponse
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_emoticon_shop.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.*
 import kotlinx.android.synthetic.main.activity_friend_list_fragment.view.*
 import kotlinx.android.synthetic.main.activity_in_message.*
+import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -73,9 +77,9 @@ class FriendListFragment : Fragment() {
         BirthdayFriendData.add(BirthdayFriendData("곽민", "2019년 행복하길"))
         homeFragmentView.rl_friend_list_birthdatpeople.adapter = BirthdayFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_birthdatpeople.layoutManager = LinearLayoutManager(context!!)
- //getFriendListpost()
 
 
+        getFriendListpost()
         val simpleItemTouchCallback =
             object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
@@ -199,6 +203,7 @@ class FriendListFragment : Fragment() {
             getUserKAKAOInfoPost()
         } else if(SharedPreferenceController.getSQAuthorization(ctx).isNotEmpty()){
             getMyProfile()  //sq 통신
+            getMyprofilePost()
         }
     }
     fun getFriendListpost() {
@@ -233,7 +238,31 @@ class FriendListFragment : Fragment() {
         })
     }
 
+    fun getMyprofilePost(){
+        var jsonObject = JSONObject()
+        jsonObject.put("Email",SharedPreferenceController.getEmail(ctx))
+        jsonObject.put("Pw", SharedPreferenceController.getPW(ctx))
 
+//Gson 라이브러리의 Json Parser을 통해 객체를 Json으로!
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        var postLoginResponse: Call<PostLoginResponse> = SqnetworkService.postLoginResponse("application/json",gsonObject)
+        postLoginResponse.enqueue(object : Callback<PostLoginResponse> {
+            override fun onResponse(call: Call<PostLoginResponse>?, response: Response<PostLoginResponse>?) {
+                Log.v("TAG", "보드 서버 통신 연결")
+                if (response!!.isSuccessful) {
+                    if(response.body()!!.message=="성공") {
+
+                                tv_friend_myname.setText(response.body()!!.result[0].Name.toString())
+
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<PostLoginResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
     fun getMyProfile(){
         var getProfileResponse: Call<GetprofileResponse> = SqnetworkService.getprofileResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
         getProfileResponse.enqueue(object : Callback<GetprofileResponse> {
@@ -253,6 +282,9 @@ class FriendListFragment : Fragment() {
             }
         })
     }
+
+
+
     fun getUserKAKAOInfoPost(){
         var getUserInfomationResponse: Call<GetUserInfomationResponse> = networkService.getUserInfomationResponse("Bearer "+SharedPreferenceController.getKaKaOAuthorization(ctx))
         getUserInfomationResponse.enqueue(object : Callback<GetUserInfomationResponse> {

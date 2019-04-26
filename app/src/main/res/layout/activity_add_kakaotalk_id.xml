@@ -115,43 +115,11 @@
         android:id="@+id/rl_add_myfriend"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/iv_add_friend_pic"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bori"
-            app:civ_border_color="#0C353232"
-            app:civ_border_width="2dp" />
 
-        <TextView
-            android:layout_marginTop="8dp"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/iv_add_friend_pic"
-            android:id="@+id/tv_add_frinedname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="14음정환"/>
-        <TextView
-            android:layout_marginTop="8dp"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/tv_add_frinedname"
-            android:id="@+id/tv_add_frinedstatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="새로운 친구입니다."/>
         <Button
             android:background="@color/colorPrimary"
             android:layout_marginTop="8dp"
             android:layout_centerInParent="true"
-            android:layout_below="@+id/tv_add_frinedstatus"
             android:id="@+id/btn_add_addfriend"
             android:layout_width="150dp"
             android:layout_height="wrap_content"

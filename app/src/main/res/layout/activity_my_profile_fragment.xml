@@ -68,7 +68,7 @@
                         android:layout_width="80dp"
                         android:layout_height="100dp"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/bori"
+                        android:src="@drawable/defaultprofile"
                         android:layout_marginLeft="8dp"
                         android:scaleType="centerCrop"
                         app:civ_border_color="#ffffff"
@@ -78,18 +78,20 @@
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"
                         android:id="@+id/tv_main_myname"
+                        android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/iv_main_mypicture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="김무현"/>
+                        android:text=""/>
                     <TextView
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:id="@+id/tv_main_myemail"
                         android:layout_toRightOf="@+id/iv_main_mypicture"
                         android:layout_below="@id/tv_main_myname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dlfb7@naver.com"/>
+                        android:text=""/>
                     <ImageView
                         android:id="@+id/iv_main_mypage"
                         android:layout_centerInParent="true"
@@ -210,10 +212,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/topbar"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -232,17 +231,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MY"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_marginTop="32dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/tv_mypage_my"
                 android:id="@+id/iv_mypage_mypicture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/mypicture"/>
+                android:src="@drawable/defaultprofile"/>
             <TextView
                 android:id="@+id/tv_mypage_name"
-                android:text="김무현"
+                android:text=""
                 android:textSize="20dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -252,7 +251,7 @@
                 android:layout_below="@+id/iv_mypage_mypicture"/>
             <TextView
                 android:id="@+id/tv_mypage_email"
-                android:text="dlfb77@gmail.com"
+                android:text=""
                 android:textSize="16dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"

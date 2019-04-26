@@ -11,8 +11,7 @@
      android:id="@+id/tv_myprofile_background"
      android:layout_width="match_parent"
      android:layout_height="550dp"
-     android:scaleType="centerCrop"
-     android:src="@drawable/backgroundimage"/>
+     android:scaleType="centerCrop" />
 
  <ImageView
      android:id="@+id/idfinish"
@@ -32,7 +31,7 @@
      android:id="@+id/iv_myprofile_mypicture"
      android:layout_width="130dp"
      android:layout_height="130dp"
-     android:src="@drawable/bori"
+     android:src="@drawable/defaultprofile"
      />
   <TextView
       android:id="@+id/tv_myprofile_status"
@@ -40,7 +39,7 @@
       android:gravity="center"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Test"
+      android:text=""
       android:textSize="50dp"
       android:textColor="#ffffff"/>
   <TextView
@@ -52,15 +51,15 @@
       android:layout_height="wrap_content"
       android:textSize="20dp"
       android:textColor="#000000"
-      android:text="김무현"/>
+      android:text=""/>
   <TextView
       android:id="@+id/tv_myprofile_email"
-      android:layout_marginTop="15dp"
+      android:layout_marginTop="10dp"
       android:layout_centerInParent="true"
       android:layout_below="@+id/tv_myprofile_myname"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="dlfb77@gmail.com"/>
+      android:text=""/>
   <ImageView
       android:layout_marginBottom="25dp"
       android:id="@+id/iv_myprofile_modifyprofile"
