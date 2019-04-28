@@ -87,8 +87,7 @@ class AddKakaotalkIdActivity : AppCompatActivity() {
             override fun onResponse(call: Call<PostAddFriendResponse>?, response: Response<PostAddFriendResponse>?) {
                 if (response!!.isSuccessful) {
 
-                    if (response.body()!!.result.isNotEmpty()) {
-
+                    if (response.body()!!.message=="성공") {
                         ll_add_myid.visibility=View.GONE
                         ll_add_cantfind.visibility=View.GONE
                         rl_add_myfriend.visibility=View.VISIBLE

@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BanFriendActivity"></activity>
+        <activity android:name=".FavoriteFriendActivity"></activity>
+        <activity android:name=".BanFriendActivity" />
         <activity android:name=".FriendProfileActivity" />
         <activity android:name=".EmoticonShopActivity" />
         <activity android:name=".KakaoTranslateActivity" />

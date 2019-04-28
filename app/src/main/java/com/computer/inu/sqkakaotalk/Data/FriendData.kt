@@ -5,5 +5,5 @@ data class FriendData (
     val Email:String,
     val Prof_img : String,
     val Back_img : String,
-    val Status : String
+    val Status : String?
 )

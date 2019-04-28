@@ -103,12 +103,14 @@ interface SqNetworkService {
         @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String
     ): Call<GetFavoriteResponse>
-    @DELETE("/kacao/favorites")  //즐겨찾기 삭제
+
+    @HTTP(method = "DELETE", path = "/kacao/favorites", hasBody = true)
     fun deleteFavoriteResponse(
         @Header("Content-Type") content_type: String,
         @Header("x-access-token") Authorization : String,
-        @Body() body: JsonObject   //Friend_Email
+        @Body `object`: JsonObject
     ): Call<DeleteFavoriteResponse>
+
     @GET("/kacao/emoticon")  //이모티콘 (전체)
     fun getEmoticonResponse(
         @Header("Content-Type") content_type: String,

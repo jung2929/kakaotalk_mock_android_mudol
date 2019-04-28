@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_friend_profile.*
 import kotlinx.android.synthetic.main.activity_myprofile.*
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
@@ -28,6 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FriendProfileActivity : AppCompatActivity() {
+
     val SqnetworkService: SqNetworkService by lazy {
         ApplicationController.instance.SqnetworkService
     }
@@ -36,6 +38,9 @@ class FriendProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_friend_profile)
         iv_idfinish.setOnClickListener {
             finish()
+        }
+        iv_friendprofile_chatwithfriend.setOnClickListener {
+            startActivity<InMessageActivity>("name" to tv_friendprofile_friendname.text.toString())
         }
         iv_friendprofile_star.setOnClickListener {
             addFavoriteopost() //즐찾 추가

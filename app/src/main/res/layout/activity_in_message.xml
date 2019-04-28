@@ -38,6 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:src="@drawable/edtchatroom"/>
+    <TextView
+        android:id="@+id/btn_inmessage_picture"
+        android:layout_gravity="bottom"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
     <EditText
         android:singleLine="true"
         android:id="@+id/edt_message"

@@ -69,7 +69,7 @@ class SignUp2Activity : AppCompatActivity() {
                 Log.v("TAG", "보드 서버 통신 연결")
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공"){
-
+                      toast("인증번호 전송")
                     }
                 }
                 else{

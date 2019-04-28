@@ -5,5 +5,5 @@ data class FavoriteFriendData (
     var Name :String,
     val Prof_img : String,
     var Back_img :String,
-    var Status :String
+    var Status :String?
 )

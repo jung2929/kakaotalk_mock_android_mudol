@@ -7,7 +7,7 @@ import com.kakao.friends.response.model.FriendInfo
 
 
 data class GetFriendResponse (
-    val result : ArrayList<FriendData>?,
+    val result : ArrayList<FriendData>,
     val code : Int,
     val message : String
 )

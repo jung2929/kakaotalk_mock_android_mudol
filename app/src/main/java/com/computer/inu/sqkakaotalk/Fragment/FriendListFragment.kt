@@ -218,6 +218,19 @@ class FriendListFragment : Fragment() {
             getMyprofilePost()
         }
     }
+    override fun onResume() {
+        super.onResume()
+        ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
+        rl_friend_color.visibility=View.GONE
+        getFriendListpost()
+        getMyProfile()
+        getFavoriteFriendListpost()
+/*        if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신전 사진 이미지
+            val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            iv_friend_mypicture.setImageBitmap(decodedByte)
+        }*/
+    }
     fun getFriendListpost() {
         var getFriendListResponse : Call<GetFriendResponse> = SqnetworkService.getFriendResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
         getFriendListResponse.enqueue(object : Callback<GetFriendResponse> {
@@ -232,7 +245,7 @@ class FriendListFragment : Fragment() {
                 val  FriendDataList = response.body()!!.result!!
 
                     for (i in 0..FriendDataList.size - 1) {
-                        FriendData.add(FriendData(FriendDataList[i].Name,FriendDataList[i].Email,FriendDataList[i].Prof_img,FriendDataList[i].Back_img,FriendDataList[i].Status))
+                        FriendData.add(FriendData(FriendDataList[i].Name,FriendDataList[i].Email,FriendDataList[i].Prof_img,FriendDataList[i].Back_img,FriendDataList[i]?.Status))
                     }
                     FriendListRecyclerViewAdapter= FriendListRecyclerViewAdapter(context!!, FriendData)
                     rl_friend_list_listpeople.adapter = FriendListRecyclerViewAdapter
@@ -263,7 +276,7 @@ class FriendListFragment : Fragment() {
                     val  FavoriteFriendDataList = response.body()!!.result!!
 
                     for (i in 0..FavoriteFriendDataList.size-1) {
-                        FavoriteFriendData.add(FavoriteFriendData(FavoriteFriendDataList[i].Email,FavoriteFriendDataList[i].Name,FavoriteFriendDataList[i].Prof_img,FavoriteFriendDataList[i].Back_img,FavoriteFriendDataList[i].Status))
+                        FavoriteFriendData.add(FavoriteFriendData(FavoriteFriendDataList[i].Email,FavoriteFriendDataList[i].Name,FavoriteFriendDataList[i].Prof_img,FavoriteFriendDataList[i].Back_img,FavoriteFriendDataList[i]?.Status))
                     }
 
                     FavoriteFriendListRecyclerViewAdapter= FavoriteFriendListRecyclerViewAdapter(context!!, FavoriteFriendData)
@@ -333,7 +346,7 @@ class FriendListFragment : Fragment() {
             override fun onResponse(call: Call<GetprofileResponse>?, response: Response<GetprofileResponse>?) {
                 if (response!!.isSuccessful) {
                     if(response.body()!!.message=="성공"){
-
+                        rv_tv_friend_friendcontents.setText(response.body()!!.result.Status.toString())
                         Glide.with(ctx).load(response.body()!!.result.Prof_img.toString()).into(iv_friend_mypicture)
                     }
                 }
@@ -368,15 +381,6 @@ class FriendListFragment : Fragment() {
         })
     }
     
-    override fun onResume() {
-        super.onResume()
-        ll_friend_addfriend.visibility=View.GONE     //친구추가 X 버튼
-        rl_friend_color.visibility=View.GONE
-/*        if (SharedPreferenceController.getIMAGE(ctx).isNotEmpty()){  //통신전 사진 이미지
-            val decodedString = Base64.decode(SharedPreferenceController.getIMAGE(ctx), Base64.DEFAULT)
-            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-            iv_friend_mypicture.setImageBitmap(decodedByte)
-        }*/
-    }
+
 
 }

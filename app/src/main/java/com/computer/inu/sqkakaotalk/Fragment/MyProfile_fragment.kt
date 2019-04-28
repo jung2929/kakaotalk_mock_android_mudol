@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.computer.inu.sqkakaotalk.*
+import com.computer.inu.sqkakaotalk.delete.DeleteUserInfoResponse
 import com.computer.inu.sqkakaotalk.get.GetUserInfomationResponse
 import com.computer.inu.sqkakaotalk.get.GetprofileResponse
 import com.computer.inu.sqkakaotalk.network.ApplicationController
@@ -47,6 +48,9 @@ class MyProfile_fragment : Fragment() {
 
         getMyprofilePost()
         getMyProfile()
+        tv_myprofile_secession.setOnClickListener {
+            sessionPost()  //회원탈퇴
+        }
         tv_myprofile_banFriend.setOnClickListener {
            startActivity<BanFriendActivity>()
         }
@@ -136,6 +140,26 @@ class MyProfile_fragment : Fragment() {
 
             }
             override fun onFailure(call: Call<PostLoginResponse>?, t: Throwable?) {
+                Log.v("TAG", "통신 실패 = " +t.toString())
+            }
+        })
+    }
+    fun sessionPost(){
+
+        var sessionResponse: Call<DeleteUserInfoResponse> = SqnetworkService.deleteUserInfoResponse("application/json",SharedPreferenceController.getSQAuthorization(ctx))
+        sessionResponse.enqueue(object : Callback<DeleteUserInfoResponse> {
+            override fun onResponse(call: Call<DeleteUserInfoResponse>?, response: Response<DeleteUserInfoResponse>?) {
+
+                if (response!!.isSuccessful) {
+                    SharedPreferenceController.clearSQSPC(ctx)
+                    SharedPreferenceController.clearAutoLogin(ctx)
+                    SharedPreferenceController.clearEmail(ctx)
+                    SharedPreferenceController.clearPW(ctx)
+                    activity!!.finish()
+                }
+
+            }
+            override fun onFailure(call: Call<DeleteUserInfoResponse>?, t: Throwable?) {
                 Log.v("TAG", "통신 실패 = " +t.toString())
             }
         })

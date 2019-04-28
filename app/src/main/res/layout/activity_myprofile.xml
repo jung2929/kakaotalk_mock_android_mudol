@@ -21,11 +21,20 @@
      android:layout_marginTop="8dp"
      android:src="@drawable/backbutton" />
  <RelativeLayout
-
      android:layout_width="match_parent"
      android:layout_height="match_parent">
- <de.hdodenhof.circleimageview.CircleImageView
-     android:layout_marginTop="440dp"
+  <ImageView
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="530dp"
+      android:layout_alignParentRight="true"
+      android:id="@+id/iv_backgound_modify_button"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:src="@drawable/camera"/>
+
+
+  <de.hdodenhof.circleimageview.CircleImageView
+     android:layout_marginTop="450dp"
      android:layout_alignParentRight="true"
      android:layout_alignParentLeft="true"
      android:id="@+id/iv_myprofile_mypicture"
@@ -33,6 +42,23 @@
      android:layout_height="130dp"
      android:src="@drawable/defaultprofile"
      />
+  <TextView
+      android:id="@+id/tv_Myprofile_status"
+      android:layout_marginTop="200dp"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text=""
+      android:textSize="50dp"
+      android:textColor="#ffffff"/>
+  <ImageView
+      android:layout_marginRight="150dp"
+      android:layout_marginTop="550dp"
+      android:layout_alignParentRight="true"
+      android:id="@+id/iv_Profile_modify_button"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:src="@drawable/camera"/>
   <TextView
       android:id="@+id/tv_myprofile_status"
       android:layout_marginTop="200dp"
