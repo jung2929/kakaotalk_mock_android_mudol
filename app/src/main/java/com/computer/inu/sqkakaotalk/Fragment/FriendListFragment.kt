@@ -89,7 +89,7 @@ class FriendListFragment : Fragment() {
         val homeFragmentView: View = inflater!!.inflate(R.layout.activity_friend_list_fragment, container, false)
         BirthdayFriendListRecyclerViewAdapter=
             BirthdayFriendListRecyclerViewAdapter(context!!, BirthdayFriendData)
-        BirthdayFriendData.add(BirthdayFriendData("곽민", "2019년 행복하길"))
+        BirthdayFriendData.add(BirthdayFriendData("김무현", "4월 28일 생일입니다!"))
         homeFragmentView.rl_friend_list_birthdatpeople.adapter = BirthdayFriendListRecyclerViewAdapter
         homeFragmentView.rl_friend_list_birthdatpeople.layoutManager = LinearLayoutManager(context!!)
 

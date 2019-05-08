@@ -48,15 +48,14 @@ class AddKakaotalkIdActivity : AppCompatActivity() {
             var handled = false
             if (action == EditorInfo.IME_ACTION_SEARCH) {
                 AddFriendPost()
-         /*       if (et_addkakaotalk_id.text.toString() == "ejh9853") {
-                    ll_add_myid.visibility=View.GONE
-                    ll_add_cantfind.visibility=View.GONE
-                    rl_add_myfriend.visibility=View.VISIBLE
-
-                } else{
-                    ll_add_myid.visibility=View.GONE
-                    ll_add_cantfind.visibility=View.VISIBLE
-                }*/
+                /*       if (et_addkakaotalk_id.text.toString() == "ejh9853") {
+                           ll_add_myid.visibility=View.GONE
+                           ll_add_cantfind.visibility=View.GONE
+                           rl_add_myfriend.visibility=View.VISIBLE
+                       } else{
+                           ll_add_myid.visibility=View.GONE
+                           ll_add_cantfind.visibility=View.VISIBLE
+                       }*/
                 val imm = applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
                 imm!!.hideSoftInputFromWindow(et_addkakaotalk_id.getWindowToken(), 0)
             }
